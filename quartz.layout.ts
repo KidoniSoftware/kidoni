@@ -10,13 +10,13 @@ export const sharedPageComponents: SharedLayout = {
       provider: 'giscus',
       options: {
         // from data-repo
-        repo: 'kidonisoftware/kidoni.dev',
+        repo: 'kidonisoftware/kidoni',
         // from data-repo-id
-        repoId: 'R_kgDONTev4A',
+        repoId: 'R_kgDONduRGw',
         // from data-category
         category: 'Announcements',
         // from data-category-id
-        categoryId: 'DIC_kwDONTev4M4CksuA',
+        categoryId: 'DIC_kwDONduRG84ClO6M',
         inputPosition: "top",
       }
     }),
