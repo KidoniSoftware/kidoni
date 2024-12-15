@@ -1,7 +1,7 @@
 ---
 title: Learning Git Internals with Rust
 description: the first in a series on Git internals as a project to learn Rust
-created: 2024-07-26
+date: 2024-07-26
 tags:
   - git
   - rust

@@ -1,7 +1,7 @@
 ---
 title: My Three Must Read Books for the Working Software Developer
 description: some book recommendations for developers
-created: 2020-12-23
+date: 2020-12-23
 tags:
   - books
   - recommendation
@@ -9,8 +9,6 @@ tags:
   - blog
 draft: false
 ---
-
-## My Three Must Read Books for the Working Software Developer
 
 I've read a lot of books over my almost thirty year career as a software
 developer. A lot of books have helped me understand various topics
@@ -100,12 +98,14 @@ blocks of software construction. Pretty much everything else is built on
 this foundation. Without a solid foundation, you're building your
 software on sand.
 
+## Conclusion
+
 So there you have it, my top three picks. As always when someone makes a
 list like this, there are going to be a lot of differing opinions. There
 are many more books I recommend. Several quickly jump to
-mind --- *Refactoring: Improving the Design of Existing Code* by Martin
+mind ... _Refactoring: Improving the Design of Existing Code_ by Martin
 Fowler, _Extreme Programming Explained: Embrace Change_ by Kent Beck,
-and if you're a Unix geek like me, _The Magic Garden Explained: The
+and if you're a Unix geek like me, both _The Magic Garden Explained: The
 Internals of Unix System V Release 4 : An Open Systems Design_ by James
 Cox and Berny Goodheart and _Design and Implementation of the 4.4 BSD
 Operating System_ by Marshall Kirk McKusick et al. (or 4.2 BSD or 4.3

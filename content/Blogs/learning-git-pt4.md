@@ -1,7 +1,7 @@
 ---
 title: Learning Git Internals with Rust
 description: Part 4 - cat-file
-created: 08-25-2024
+date: 08-25-2024
 tags:
   - git
   - rust

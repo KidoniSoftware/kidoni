@@ -1,7 +1,7 @@
 ---
 title: Learning Git Internals with Rust
 description: Part 3 - Rust refactoring
-created: 08-20-2024
+date: 08-20-2024
 tags:
   - git
   - rust

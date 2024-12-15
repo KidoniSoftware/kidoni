@@ -1,7 +1,7 @@
 ---
 title: Learning Git Internals with Rust
 description: Part 5 - ls-tree
-created: 10-06-2024
+date: 10-06-2024
 tags:
   - git
   - rust

@@ -1,7 +1,7 @@
 ---
 title: Learning Git Internals with Rust - creating tree and commit objects
 description: Part 6 - tree and commit objects
-created: 2024-10-07
+date: 2024-10-07
 tags:
   - git
   - rust

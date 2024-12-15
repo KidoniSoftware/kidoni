@@ -1,7 +1,7 @@
 ---
 title: Bootiful ksqlDb part 2 --- creating a stream
 description:
-created:
+date:
 tags:
   - blog
   - springboot
