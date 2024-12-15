@@ -7,7 +7,7 @@ tags:
   - rust
   - programming
   - blog
-draft: false
+draft: true
 ---
 
 Have you ever wondered how Git does what it does? What happens when you

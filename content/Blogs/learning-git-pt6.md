@@ -7,7 +7,7 @@ tags:
   - rust
   - programming
   - blog
-draft: false
+draft: true
 ---
 
 In this blog I continue my journey with Rust and Git, focusing on creating the

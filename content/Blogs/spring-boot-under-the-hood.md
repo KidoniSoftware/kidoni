@@ -10,7 +10,7 @@ tags:
   - REST
   - observability
   - blog
-draft: false
+draft: true
 ---
 
 In this series of posts I will dive "under the hood" of Spring Boot by implementing an application with multiple services, deployed to the cloud in Kubernetes, with authentication and authorization, observability (logging, metrics, distributed tracing), REST APIs, data stored in [Neo4j](https://neo4j.com/) and more. The point of the series is less about the application itself, but learning how Spring and Spring Boot do what they do. There is a lot of "magic" - or seemingly so - when you build a Spring Boot-based application. I mean, think about it - you can write 8 lines of code (ignoring the package and imports)
