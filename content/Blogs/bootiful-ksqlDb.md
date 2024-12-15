@@ -9,7 +9,7 @@ tags:
   - kafka
   - kafkastreams
   - java
-draft: true
+draft: false
 ---
 
 In this post I will show how to use the [ksqlDb](https://docs.ksqldb.io/en/latest/)
@@ -101,11 +101,23 @@ SELECT CUST_ID, SUM(ORDER_AMT)
 
 You can also express that using the Kafka Streams API:
 
-TODO: missing gist, replace with inline
+```java
+StreamsBuilder streamsBuilder = new StreamsBuilder();
+KStream<Integer, Order> ordersStream = streamsBuilder.stream("orders");
+ordersStream
+    .filter((key, value) -> value.orderType == Electronics)
+    .groupByKey()
+    .aggregate(() -> 0.0f, (key, value, sum) -> sum += value.orderAmount)
+    .toStream()
+        .to("output");
+Topology topology = streamsBuilder.build();
+KafkaStreams kafkaStreams = new KafkaStreams(topology, new Properties());
+kafkaStreams.start();
+```
 
 As you can see, it's somewhat more complicated than the SQL. You have to
 create the stream using the builder (line 1), define your operations
-(lines 4--6) convert to a Topology (line 9) which is then provided to
+(lines 4-6) convert to a Topology (line 9) which is then provided to
 the `KafkaStream` manager that handles
 the lifecycle (line 10), which I've limited to showing the call to the
 `start()` method (line 11). You also must
@@ -140,7 +152,14 @@ is](https://github.com/raysuliteanu/ksqldb-demo/blob/master/docker-compose.yml).
 
 As such, Docker is a prerequisite for running this Boot app.
 
-TODO: missing gist, replace with inline
+```java
+@SpringBootApplication
+public class KsqldbDemoApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(KsqldbDemoApplication.class, args);
+    }
+}
+```
 
 With Spring Webflux you need two things, a router configuration that
 maps REST endpoints to handler functions, and the handler functions. For
@@ -149,7 +168,33 @@ proxy the ksqlDb REST client "server info" method that queries the
 ksqlDb server for some metadata. So the Webflux router exposes a "/info"
 endpoint and routes to a handler.
 
-TODO: missing gist, replace with inline
+```java
+@EnableWebFlux
+@Configuration
+public class WebfluxRouterConfiguration {
+    public static final String DEFAULT_SERVER_ADDRESS = "http://localhost:8088";
+
+    @Bean
+    public RouterFunction<ServerResponse> infoRouterFunction(KsqlDbRequestHandler ksqlDbRequestHandler) {
+        return RouterFunctions.route()
+            .GET("/info", ksqlDbRequestHandler::info)
+            .build();
+    }
+
+    @Bean
+    public KsqlDbRequestHandler ksqlDbRequestHandler(KsqlRestClient ksqlRestClient) {
+        return new KsqlDbRequestHandler(ksqlRestClient);
+    }
+
+    @Bean
+    public KsqlRestClient ksqlRestClient() {
+        return KsqlRestClient.create(DEFAULT_SERVER_ADDRESS,
+            Collections.emptyMap(),
+            Collections.emptyMap(),
+            Optional.empty());
+    }
+}
+```
 
 The `infoRouterFunction()` uses the
 injected handler bean and associates "/info" with the
@@ -165,7 +210,35 @@ support.
 
 The handler class shown next is similarly relatively straightforward.
 
-TODO: missing gist, replace with inline
+```java
+public class KsqlDbRequestHandler {
+
+    private final KsqlRestClient ksqlRestClient;
+
+    public KsqlDbRequestHandler(KsqlRestClient ksqlRestClient) {
+        this.ksqlRestClient = ksqlRestClient;
+    }
+
+    public Mono<ServerResponse> info(ServerRequest serverRequest) {
+        RestResponse<ServerInfo> serverInfo = ksqlRestClient.getServerInfo();
+        if (serverInfo.isSuccessful()) {
+            ServerInfo serverInfoResponse = serverInfo.getResponse();
+            return ServerResponse.ok()
+                .bodyValue(format("cluster_id: %s, ksql_service_id: %s, server_status: %s, version: %s",
+                    serverInfoResponse.getKafkaClusterId(),
+                    serverInfoResponse.getKsqlServiceId(),
+                    serverInfoResponse.getServerStatus(),
+                    serverInfoResponse.getVersion()));
+        }
+        else {
+            KsqlErrorMessage errorMessage = serverInfo.getErrorMessage();
+            String body = format("Error: %s Code: %s",
+                errorMessage.getMessage(), errorMessage.getErrorCode());
+            return ServerResponse.status(HttpStatus.INTERNAL_SERVER_ERROR).bodyValue(body);
+        }
+    }
+}
+```
 
 The ksqlDb REST client has a `serverInfo()` method as mentioned. The handler's
 `info()` method simply executes the
@@ -198,7 +271,15 @@ and orchestration.
 Testcontainers also integrates easily with JUnit 5. Simply use the
 `@Container` annotation.
 
-TODO: missing gist, replace with inline
+```java
+    @Container
+    public static DockerComposeContainer dockerComposeContainer =
+        new DockerComposeContainer<>(new File("src/test/resources/compose-test.yml"))
+            .withServices("zookeeper", "broker", "ksqldb-server")
+            .withExposedService("ksqldb-server", 8088,
+                Wait.forHealthcheck())
+            .withLocalCompose(true);
+```
 
 For testing, I created a stripped down and slightly modified
 docker-compose YAML file and put it in the test resources folder. As you
@@ -213,7 +294,36 @@ With Webflux there's a test class called `WebTestClient`. Using this class
 the test will execute a call to the
 Boot application and check the response.
 
-TODO: missing gist, replace with inline
+```java
+@Testcontainers
+@AutoConfigureWebTestClient
+@SpringBootTest
+class KsqldbDemoApplicationTests {
+    @Container
+    public static DockerComposeContainer dockerComposeContainer =
+        new DockerComposeContainer<>(new File("src/test/resources/compose-test.yml"))
+            .withServices("zookeeper", "broker", "ksqldb-server")
+            .withExposedService("ksqldb-server", 8088,
+                Wait.forHealthcheck())
+            .withLocalCompose(true);
+
+    @Autowired
+    private WebTestClient webTestClient;
+
+    @Test
+    void infoHandler() {
+        webTestClient.get()
+            .uri("/info")
+            .exchange()
+            .expectStatus().isOk()
+            .expectBody(String.class)
+            .consumeWith(result -> {
+                String responseBody = result.getResponseBody();
+                assertThat(responseBody)
+                .contains("cluster_id", "ksql_service_id", "server_status", "version");
+            });
+    }
+```
 
 Line 1 enables the Testcontainers integration and line 2 ensures that a
 `WebTestClient` is created and available

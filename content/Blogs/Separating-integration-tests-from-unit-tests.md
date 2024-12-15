@@ -7,8 +7,17 @@ tags:
   - programming
   - testing
   - gradle
-draft: true
+draft: false
 ---
+
+> Update 2024-12-15
+> This blog is obviously very OO-centric, focusing on the notion of a
+> class as the smallest "unit". Obviously, in non-OO languages, what
+> a "unit" is will vary e.g. it could be a compilation unit. But the
+> idea still holds, that you are trying to test individual units of
+> behavior without pulling in dependencies that may result in longer
+> startup time, failures in the dependencies (which may be out of your
+> control), or code that doesn't exist yet (for TDD).
 
 One of the key aspects of agile software development --- the thing that
 enables the agility of the coders --- is plentiful tests.
@@ -21,11 +30,11 @@ only expect a delay of at most a few seconds, even for hundreds of
 tests.
 
 What is sometimes overlooked by people new to this practice is that
-these should be **_unit_** tests. It is unfortunately all too common, no
+these should be _unit tests_. It is unfortunately all too common, no
 matter how experienced a developer might be, not to understand what is
 mean by "unit test". A unit test class is a very specific thing.
 
-> A unit test class is a set of methods to validate _a_ **_single_** > _class-under-test._
+> A unit test class is a set of methods to validate a single class-under-test.
 
 A unit test class tests a single class. If that class uses other
 classes, those need to be stubbed/mocked. This serves multiple purposes
