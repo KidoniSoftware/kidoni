@@ -13,3 +13,5 @@ but you never know what else I might throw in.
 
 Stay tuned for additional content and features, like signing up for a
 notification when new blogs are posted.
+
+[[Blogs/]]
