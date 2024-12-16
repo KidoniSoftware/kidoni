@@ -9,6 +9,7 @@ import * as Plugin from "./quartz/plugins"
 const config: QuartzConfig = {
   configuration: {
     pageTitle: "kidoni.dev",
+    generateSocialImages: true,
     enableSPA: true,
     enablePopovers: true,
     analytics: {

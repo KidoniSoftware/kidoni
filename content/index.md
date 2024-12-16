@@ -1,5 +1,6 @@
 ---
 title: Welcome to kidoni.dev
+image: images/me.png
 ---
 
 This is my blog. I write mostly about software development and related topics,
