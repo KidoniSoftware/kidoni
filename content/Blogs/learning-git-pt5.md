@@ -1,13 +1,13 @@
 ---
-title: Learning Git Internals with Rust
-description: Part 5 - ls-tree
+title: Learning Git Internals with Rust - Part 5
+description: git ls-tree
 date: 10-06-2024
 tags:
   - git
   - rust
   - programming
   - blog
-draft: true
+draft: false
 ---
 
 In this latest blog on Git internals with Rust, I will focus on the `ls-tree`
@@ -22,7 +22,7 @@ The `ls-tree` command is similar to doing an `ls` in a terminal emulator. It
 lists the contents of `tree` objects in Git. The Git object model looks like
 this (copied from Part 2)
 
-TODO: insert figure
+![git object tree](images/git-object-tree.png)
 
 A `commit` object contains (among other things) a "pointer" to a `tree` object
 in the form of a SHA-1 hash (\`01a2\` in the diagram). The `tree` object
@@ -63,7 +63,7 @@ Cargo.toml in the example above) and the file name in the first part, and after
 the null byte the 20 byte SHA-1 hash. This is the raw bytes, not ASCII-encoded
 (otherwise it would be 40 bytes, right). So a `tree` object looks something like
 
-TODO: replace figure/gist
+![raw tree object](images/raw-tree-object.png)
 
 The `ls-tree` command also allows printing the size of the file with the
 `-l/--long` option e.g.
@@ -89,7 +89,62 @@ First off we're going to refactor some of the code from earlier posts to make
 our lives a little easier. I have extracted the object reading code into its own
 module and struct, moving it from the `util` module.
 
-TODO: replace figure/gist
+```rust
+#[derive(Debug, PartialEq)]
+pub(crate) enum GitObjectType {
+    Blob,
+    Tree,
+    Commit,
+}
+
+pub(crate) struct GitObject<'a> {
+    pub(crate) kind: GitObjectType,
+    pub(crate) sha1: &'a str,
+    pub(crate) size: usize,
+    pub(crate) body: Option<Vec<u8>>,
+}
+
+impl GitObject<'_> {
+    pub(crate) fn read(obj_id: &str) -> GitResult<GitObject> {
+        trace!("read({obj_id})");
+        let path = find_object_file(obj_id)?;
+        let file = std::fs::File::open(path)?;
+        let reader = BufReader::new(file);
+        let contents = GitObject::decode_obj_content(reader)?;
+        let mut header_and_body = contents.splitn(2, |b| *b == 0);
+        let header = header_and_body.next().unwrap();
+        let body = header_and_body.next().unwrap();
+        let (obj_type, size) = GitObject::get_object_header(header)?;
+
+        Ok(GitObject {
+            kind: obj_type.into(),
+            sha1: obj_id,
+            size,
+            body: Some(body.to_vec()),
+        })
+    }
+
+    fn get_object_header(content: &[u8]) -> GitResult<(String, usize)> {
+        let header = &mut content.splitn(2, |x| *x == b' ');
+        let obj_type = bytes_to_string(header.next().unwrap());
+        let obj_len_bytes = header.next().unwrap();
+        match u8_slice_to_usize(obj_len_bytes) {
+            None => Err(GitError::ReadObjectError),
+            Some(obj_len) => Ok((obj_type, obj_len)),
+        }
+    }
+
+    fn decode_obj_content(mut reader: impl BufRead) -> GitResult<Vec<u8>> {
+        let content: &mut Vec<u8> = &mut Vec::new();
+        let _ = reader.read_to_end(content)?;
+        let mut decoder = ZlibDecoder::new(&content[..]);
+        let mut decoded_content: Vec<u8> = Vec::new();
+        decoder.read_to_end(&mut decoded_content)?;
+
+        Ok(decoded_content)
+    }
+}
+```
 
 A couple of the utility functions from `util` came along and are now part of the
 `GitObject` implementation. The `GitObject` `read()` method only decodes the
@@ -101,7 +156,12 @@ finding Git directories.
 The other main refactoring was to move the `tree` object printing that was in
 `cat-file` for dumping `tree` objects into the new `ls-tree` command handling.
 
-TODO: replace figure/gist
+```rust
+fn handle_cat_file_tree_object(obj: GitObject) -> GitResult<()> {
+    let args = LsTreeArgs::default();
+    ls_tree::print_tree_object(&args, obj)
+}
+```
 
 I was also able to simplify the tree printing function itself, which I'll show
 later.
@@ -112,7 +172,38 @@ Following the pattern I've established I created a new `ls-tree` module in the
 `commands` module and a new arguments structure `LsTreeArgs` for the command-line
 options handled by `clap`.
 
-TODO: replace figure/gist
+```rust
+#[derive(Debug, Args, Default)]
+pub(crate) struct LsTreeArgs {
+    /// Show only the named tree entry itself, not its children.
+    #[arg(long, default_value = "false")]
+    name_only: bool,
+
+    /// Show only the named tree entry itself, not its children.
+    #[arg(short, default_value = "false")]
+    dir_only: bool,
+
+    /// Recurse into sub-trees.
+    #[arg(short, default_value = "false")]
+    recurse: bool,
+
+    /// Show tree entries even when going to recurse them. Has no effect if -r was not passed.  -d implies -t.
+    #[arg(short = 't', default_value = "false")]
+    show_trees: bool,
+
+    /// Show object size of blob (file) entries.
+    #[arg(short = 'l', long = "long", default_value = "false")]
+    show_size: bool,
+
+    #[arg(name = "tree-ish")]
+    tree_ish: String,
+
+    /// When paths are given, show them (note that this isn’t really raw pathnames, but rather a list of
+    /// patterns to match). Otherwise implicitly uses the root level of the tree as the sole path argument.
+    #[arg(name = "path")]
+    path: Option<Vec<String>>,
+}
+```
 
 Two things to call out here are the `tree_ish` option and the `path` option. One
 thing I haven't done yet in this series is handle all the various ways you can
@@ -191,9 +282,52 @@ $ git ls-tree -r HEAD **/*.rs
 ```
 
 The `tree-ish` support is in the `ls_tree()` method and handling the various
-output options is in the `print_tree_object()` method show later.
+output options is in the `print_tree_object()` method shown later.
 
-TODO: replace figure/gist
+```rust
+pub(crate) fn ls_tree_command(args: LsTreeArgs) -> GitCommandResult {
+    ls_tree(&args.tree_ish, &args)
+}
+
+pub(crate) fn ls_tree(obj_id: &String, args: &LsTreeArgs) -> GitCommandResult {
+    trace!("ls_tree({obj_id})");
+    match GitObject::read(obj_id) {
+        Ok(obj) => match obj.kind {
+            GitObjectType::Tree => {
+                // format and print tree obj body
+                print_tree_object(&args, obj, None)
+            }
+            GitObjectType::Commit => {
+                // get tree object of commit and print that
+                let commit = commit::Commit::from(obj);
+                ls_tree(&commit.tree, args)
+            }
+            GitObjectType::Blob => {
+                debug!("cannot ls-tree a blob");
+                Err(GitError::InvalidObjectId {
+                    obj_id: args.tree_ish.to_string(),
+                })
+            }
+            _ => unreachable!("due to other branches")
+        },
+        Err(_) => {
+            debug!("cannot read object file for id '{obj_id}'; trying as a tag ...");
+            // could be that the arg_id is not an object (blob/commit/tree)
+            // check for tag
+            match tag::Tag::get_tag(obj_id) {
+                Some(tag) => ls_tree(&tag.obj_id, args),
+                None => {
+                    debug!("not a tag {obj_id}");
+                    // not a tree or a commit or a tag, no good
+                    Err(GitError::InvalidObjectId {
+                        obj_id: obj_id.to_string(),
+                    })
+                }
+            }
+        }
+    }
+}
+```
 
 I split the functions into a public `ls_tree_command()` called by `main()` and
 an `ls_tree()` that can be recursively called if the object hash is not a `tree`
@@ -205,7 +339,33 @@ To handle tags, I created a new `tag` module and `Tag` struct. Tags technically
 are not objects but references ("refs") and live in `.git/refs/tags` not
 `.git/objects`.
 
-TODO: replace figure/gist
+```rust
+pub(crate) struct Tag {
+    pub name: String,
+    pub path: PathBuf,
+    pub obj_id: String,
+}
+
+impl Tag {
+    pub(crate) fn get_tag(name: &str) -> Option<Tag> {
+        let path = get_git_tags_dir().join(name);
+        match File::open(path) {
+            Ok(mut file) => {
+                let mut obj_id = String::new();
+                match file.read_to_string(&mut obj_id) {
+                    Ok(_) => Some(Tag {
+                        name: name.to_string(),
+                        path: get_git_tags_dir().join(name),
+                        obj_id,
+                    }),
+                    Err(_) => None,
+                }
+            }
+            Err(_) => None,
+        }
+    }
+}
+```
 
 A tag "object" file is just a file with an object hash, so I read that and save
 it.
@@ -258,18 +418,135 @@ message.
 This turns out to be one of the simpler formats to read since it's all just
 plain text. No fancy separators or segments or anything.
 
-TODO: replace figure/gist
+```rust
+pub(crate) struct Commit {
+    sha1: String,
+    pub(crate) tree: String,
+    parent: String,
+    author: String,
+    committer: String,
+    comment: String,
+}
+
+impl From<GitObject<'_>> for Commit {
+    fn from(object: GitObject) -> Self {
+        let body = object.body.unwrap();
+        let mut reader = body.reader();
+
+        let tree = get_entry(&mut reader, "tree");
+        let parent = get_entry(&mut reader, "parent");
+        let author = get_entry(&mut reader, "author");
+        let committer = get_entry(&mut reader, "committer");
+
+        let mut comment = String::new();
+        let _ = reader.read_to_string(&mut comment);
+
+        Self {
+            sha1: object.sha1.to_string(),
+            tree,
+            parent,
+            author,
+            committer,
+            comment,
+        }
+    }
+}
+
+fn get_entry(reader: &mut impl BufRead, name: &str) -> String {
+    let mut entry = String::new();
+    let _ = reader.read_line(&mut entry);
+    let mut n = entry.splitn(2, ' ');
+    assert_eq!(n.next(), Some(name));
+    n.next().unwrap().trim().to_string()
+}
+```
 
 ### Printing tree objects
 
 There are a few interesting aspects to printing the tree object, mostly around
 recursion and filtering. I have not implemented the filtering as of now.
 
-TODO: replace figure/gist
+```rust
+pub fn print_tree_object(
+    args: &LsTreeArgs,
+    obj: GitObject,
+    path_part: Option<String>,
+) -> GitResult<()> {
+    // each entry is 'mode name\0[hash:20]
+    let mut body = obj.body.unwrap();
+
+    loop {
+        if body.is_empty() {
+            break;
+        }
+
+        // 1. split into two buffers, `[mode_and_name]0[rest]` with the 0 discarded
+        let mut split = body.splitn(2, |b| *b == 0);
+        let mode_and_file = split.next().unwrap();
+        let mut rest = split.next().unwrap();
+
+        // 2. spit the mode_and_name buffer into the mode and the name, which are separated by ' '
+        let mut split = mode_and_file.split(|b| *b == b' ');
+        let mode = util::bytes_to_string(split.next().unwrap());
+        let filename = util::bytes_to_string(split.next().unwrap());
+
+        // 3. read the next 20 bytes from `rest` which is the object hash
+        let mut hash_buf = [0u8; 20];
+        rest.read_exact(&mut hash_buf)?;
+
+        // 4. point body at the remaining bytes for the loop
+        body = rest.to_vec();
+
+        // 5. using the hash, look up the referenced object to get its type
+        let hash = hex::encode(hash_buf);
+        let entry_obj = GitObject::read(hash.as_str())?;
+        let kind = &entry_obj.kind;
+
+        let path = create_file_name(&path_part, filename);
+
+        // 6. if name_only then only print the name :)
+        if args.name_only {
+            if *kind == GitObjectType::Tree && args.recurse {
+                print_tree_object(args, entry_obj, Some(path))?;
+            } else {
+                println!("{}", path);
+            }
+
+            continue;
+        }
+
+        if *kind == GitObjectType::Tree && args.recurse {
+            print_tree_object(args, entry_obj, Some(path))?;
+        } else {
+            print!("{:0>6} {} {}", mode, kind, hash);
+
+            if args.show_size {
+                let len = entry_obj.size;
+                if entry_obj.kind == GitObjectType::Tree {
+                    print!("{: >8}", "-");
+                } else {
+                    print!("{: >8}", len);
+                }
+            }
+
+            println!("\t{}", path);
+        }
+    }
+
+    Ok(())
+}
+
+fn create_file_name(path: &Option<String>, filename: String) -> String {
+    match path {
+        Some(p) => p.to_owned() + "/" + filename.as_str(),
+        None => filename,
+    }
+}
+```
 
 Recall our diagram from earlier (slightly enhanced).
 
-TODO: replace figure/gist
+![enhanced raw tree object](images/enhanced-raw-tree-obj.png)
 
 The `print_tree_object()` method loops over the body, advancing a "pointer" (the
 `body` variable) to the remaining data as we work through the entries. First we
@@ -355,3 +632,6 @@ As always, please comment if you notice anything I could do better with
 my Rust coding as I'm doing this to learn Rust better. If there are
 idiomatic things that I could do that I'm not, let me know! And any
 other comments on the content or possible future content, let me know!
+
+If you enjoyed this content, and you'd like to support me, consider
+[buying me a coffee](https://www.buymeacoffee.com/raysuliteanu)

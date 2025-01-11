@@ -7,7 +7,7 @@ tags:
   - rust
   - programming
   - blog
-draft: true
+draft: false
 ---
 
 Have you ever wondered how Git does what it does? What happens when you do a
@@ -452,6 +452,9 @@ As always, please comment if you notice anything I could do better with
 my Rust coding as I'm doing this to learn Rust better. If there are
 idiomatic things that I could do that I'm not, let me know! And any
 other comments on the content or possible future content, let me know!
+
+If you enjoyed this content, and you'd like to support me, consider
+[buying me a coffee](https://www.buymeacoffee.com/raysuliteanu)
 
 ## Correction
 

@@ -1,21 +1,21 @@
 ---
-title: Learning Git Internals with Rust
-description: Part 4 - cat-file
+title: Learning Git Internals with Rust - Part 4
+description: git cat-file
 date: 08-25-2024
 tags:
   - git
   - rust
   - programming
   - blog
-draft: true
+draft: false
 ---
 
 In this post we'll cover the Git `cat-file` command. Previous posts in this
 series are
 
-- Part 1](learning-git-pt1) — git init
-- Part 2](learning-git-pt2) — git hash-object
-- Part 3](learning-git-pt3) — refactoring
+- [Part 1](learning-git-pt1) — git init
+- [Part 2](learning-git-pt2) — git hash-object
+- [Part 3](learning-git-pt3) — refactoring
 
 The Git [`cat-file`](https://git-scm.com/docs/git-cat-file) command let's you
 dump the contents of a Git object. You cannot view Git object files directly
@@ -48,7 +48,21 @@ duplication creeping in with respect to the error handling, so what I have done
 is included the [`thiserror`](https://docs.rs/thiserror/latest/thiserror/)
 crate, and defined my own error enum:
 
-TODO: replace figure/gist
+```rust
+pub type GitResult<T> = Result<T, GitError>;
+pub type GitCommandResult = GitResult<()>;
+
+#[derive(Error, Debug)]
+pub(crate) enum GitError {
+    #[error("Not a valid object name {obj_id}")]
+    InvalidObjectId { obj_id: String },
+    #[error("I/O error")]
+    Io {
+        #[from]
+        source: io::Error,
+    },
+}
+```
 
 So far the commands I have implemented have only had two errors --- either an
 underlying I/O error (e.g. couldn't open a file) or something wrong with the
@@ -63,7 +77,21 @@ rather than using the `std::io::Result` everywhere as I had been doing.
 The `main()` method changed to have the return type be `std::process::ExitCode`
 and I return the exit code explicitly based on the result.
 
-TODO: replace figure/gist
+```rust
+    let result = match git.command {
+        Commands::Init(args) => init::init_command(args),
+        Commands::CatFile(args) => cat_file::cat_file_command(args),
+        Commands::HashObject(args) => hash_object::hash_object_command(args),
+        Commands::Config(args) => config::config_command(args),
+    };
+
+    if result.is_ok() {
+        ExitCode::from(0)
+    } else {
+        eprintln!("{}", result.err().unwrap());
+        ExitCode::from(1)
+    }
+```
 
 I then changed all the return signatures from the various command handlers to
 return `GitCommandResult` e.g.
@@ -89,7 +117,28 @@ With that work out of the way, I updated the `CatFileArgs` struct so that the
 groups. One way to do that is to add a `group` option to the `#[arg]`
 definition as so:
 
-TODO: replace figure/gist
+```rust
+#[derive(Debug, Args)]
+pub(crate) struct CatFileArgs {
+    /// pretty-print object's content
+    #[arg(short, default_value = "false", group = "operation")]
+    pretty: bool,
+    /// show object type
+    #[arg(short = 't', default_value = "false", group = "operation")]
+    obj_type: bool,
+    /// allow -s and -t to work with broken/corrupt objects
+    #[arg(long, default_value = "false")]
+    allow_unknown_type: bool,
+    /// show object size
+    #[arg(short, default_value = "false", group = "operation")]
+    show_size: bool,
+    /// exit with zero when there's no error
+    #[arg(short, default_value = "false", group = "operation")]
+    exists: bool,
+    #[arg(name = "object")]
+    object: String,
+}
+```
 
 Here I added `group = "operation"` to group these mutually exclusive options
 together. You can read more about the `clap` group support
@@ -106,13 +155,39 @@ and size are trivial. For existence, we don't even need to read the file ---�
 just need to see if we can find it. So I short circuit that in the
 `cat_file_command()`
 
-TODO: replace figure/gist
+```rust
+pub(crate) fn cat_file_command(args: CatFileArgs) -> GitCommandResult {
+    let result = util::find_object_file(&args.object);
+
+    let path = match result {
+        // if -e option (test for object existence) return Ok now, don't continue
+        Ok(_) if args.exists => return Ok(()),
+        Ok(p) => p,
+        // if error already, return now, no point continuing regardless of -e option or not
+        Err(e) => return Err(GitError::from(e)),
+    };
+```
 
 If it's not the `-e` option, then I read the file. At that point, the only
 interesting thing is printing the content. For the size and type options, I just
 print those values.
 
-TODO: replace figure/gist
+```rust
+    if args.pretty {
+        match GitObjectType::from(obj_type) {
+            GitObjectType::Blob | GitObjectType::Commit => {
+                print!("{}", util::bytes_to_string(content));
+            }
+            GitObjectType::Tree => {
+                handle_cat_file_tree_object(obj_len, content)?;
+            }
+        }
+    } else if args.obj_type {
+        println!("{obj_type}");
+    } else if args.show_size {
+        println!("{obj_len}");
+    }
+```
 
 So let's focus on the pretty-printing. Here, the `blob` and `commit` types are
 the same and trivial --- the content is just printed out. Where it gets more
@@ -145,7 +220,33 @@ to properly output each row.
 
 Here's the full implementation:
 
-TODO: replace figure/gist
+```rust
+fn handle_cat_file_tree_object(content: &[u8]) -> GitResult<()> {
+    let mut consumed = 0usize;
+    let len = content.len();
+    while consumed < len {
+        let index = util::find_null_byte_index(&content[consumed..]);
+        let end = consumed + index;
+        assert!(end < content.len());
+
+        let mode_and_file = &mut content[consumed..end].split(|x| *x == b' ');
+        let mode = util::bytes_to_string(mode_and_file.next().unwrap());
+        let file = util::bytes_to_string(mode_and_file.next().unwrap());
+        consumed += index + 1; // +1 for null byte
+
+        let hash = hex::encode(&content[consumed..consumed + 20]);
+        consumed += 20; // sizeof SHA-1 hash
+
+        let obj_contents = &mut util::get_object(hash.as_str())?;
+        let index = util::find_null_byte_index(obj_contents);
+        let (obj_type, _) = util::get_object_header(obj_contents, index);
+
+        println!("{:0>6} {} {}    {}", mode, obj_type, hash, file);
+    }
+
+    Ok(())
+}
+```
 
 The code iterates through the `content` buffer, maintaining an index `consumed`
 as data gets parsed. First the file mode and name is found by first finding
@@ -218,3 +319,6 @@ the ref names like `HEAD`.
 
 As always if you have any suggestions how to improve my Rust coding skills,
 please comment.
+
+If you enjoyed this content, and you'd like to support me, consider
+[buying me a coffee](https://www.buymeacoffee.com/raysuliteanu)

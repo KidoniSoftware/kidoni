@@ -1,13 +1,13 @@
 ---
-title: Learning Git Internals with Rust
-description: Part 2 - Git Objects
+title: Learning Git Internals with Rust - Part 2
+description: Git Objects
 date: 07-30-2024
 tags:
   - git
   - rust
   - programming
   - blog
-draft: true
+draft: false
 ---
 
 This post continues from where I left off in the first post that covered
@@ -48,7 +48,7 @@ As an example, let's say our initial commit of a new Rust project had a
 `Cargo.toml` file and `src/main.rs` and `src/lib.rs` files. You might end up
 with an object graph like
 
-[](images/git-object-tree.png)
+![git object tree](images/git-object-tree.png)
 
 Note that in and of themselves, blob objects don't know anything about
 themselves --- a complete lack of self-awareness as it were. The fact that blob
@@ -223,3 +223,6 @@ As always, please comment if you notice anything I could do better with my Rust
 coding as I'm doing this to learn Rust better. If there are idiomatic things
 that I could do that I'm not, let me know! And any other comments on the
 content or possible future content, let me know!
+
+If you enjoyed this content, and you'd like to support me, consider
+[buying me a coffee](https://www.buymeacoffee.com/raysuliteanu)

@@ -1,13 +1,13 @@
 ---
-title: Learning Git Internals with Rust - creating tree and commit objects
-description: Part 6 - tree and commit objects
-date: 2024-10-07
+title: Learning Git Internals with Rust - Part 6
+description: git tree and commit objects
+date: 10-07-2024
 tags:
   - git
   - rust
   - programming
   - blog
-draft: true
+draft: false
 ---
 
 In this blog I continue my journey with Rust and Git, focusing on creating the
@@ -28,16 +28,28 @@ For easy reference, here are the previous posts.
 - [Part 4](learning-git-pt4) — git cat-file
 - [Part 5](learning-git-pt5) — git ls-tree
 
-In the previous post I showed how to print the `tree` object. Now we will createone, since that is the prerequisite for being able to create the commit object. Let’s get to it.
+In the previous post I showed how to print the `tree` object. Now we will create
+one, since that is the prerequisite for being able to create the commit object.
+Let’s get to it.
 
 > [!info]
-> I will not be implementing the Git staging area, so there will be “git add” (really git update-index) command required. I will just be creating the `tree` object from the contents of the current directory.
+> I will not be implementing the Git staging area, so there will be “git add”
+> (really git update-index) command required. I will just be creating the `tree`
+> object from the contents of the current directory.
 
 ## Creating a `tree` object
 
-The `git write-tree` command for our purposes doesn’t take any command-line options. It traverses the directory tree and for each file creates a new `blob` and if it’s a directory recurses down the directory tree. It does this first, so it’s a depth-first walk … otherwise it wouldn’t know the hash to use for the directories (i.e. trees) at the current level. After creating all the required objects, `write-tree` writes the hash of the `tree` object for the “root” to `stdout`.
+The `git write-tree` command for our purposes doesn’t take any command-line
+options. It traverses the directory tree and for each file creates a new `blob`
+and if it’s a directory recurses down the directory tree. It does this first, so
+it’s a depth-first walk … otherwise it wouldn’t know the hash to use for the
+directories (i.e. trees) at the current level. After creating all the required
+objects, `write-tree` writes the hash of the `tree` object for the “root” to
+`stdout`.
 
-Since we are creating a hierarchical tree structure, this implementation will be a recursive one. I created a new module call `write_tree` and following the pattern I’ve established, the `main()` method has a new command to process:
+Since we are creating a hierarchical tree structure, this implementation will be
+a recursive one. I created a new module call `write_tree` and following the
+pattern I’ve established, the `main()` method has a new command to process:
 
 ```rust
 fn main() -> ExitCode {
@@ -54,7 +66,12 @@ env_logger::init();
         Commands::WriteTree => write_tree::write_tree_command(),
 ```
 
-The way I implemented the recursion, the `write_tree::write_tree_command()` function calls a `write_tree()` function that takes the path of the current directory to process. Every time `write_tree()` sees a directory, it recurses, concatenating the new directory name to the current path. On the other hand, if it’s a regular file, I create a blob for it. In both cases, I keep track of the new entry in a new `struct TreeEntry`.
+The way I implemented the recursion, the `write_tree::write_tree_command()`
+function calls a `write_tree()` function that takes the path of the current
+directory to process. Every time `write_tree()` sees a directory, it recurses,
+concatenating the new directory name to the current path. On the other hand, if
+it’s a regular file, I create a blob for it. In both cases, I keep track of the
+new entry in a new `struct TreeEntry`.
 
 ```rust
 pub(crate) fn write_tree_command() -> GitCommandResult {
@@ -151,7 +168,11 @@ struct Tree {
 }
 ```
 
-One thing that turned out to be complicated and a real pain in the arse is figuring out and implementing the way Git sorts files in a tree object. I had to look it up in the [Git source](https://github.com/git/git/blob/master/tree.c#L101) and rewrite it in Rust. Could I have done it better? Perhaps. But it works 😃. Basically it sorts files before directories if the names match.
+One thing that turned out to be complicated and a real pain in the arse is
+figuring out and implementing the way Git sorts files in a tree object. I had to
+look it up in the [Git source](https://github.com/git/git/blob/master/tree.c#L101)
+and rewrite it in Rust. Could I have done it better? Perhaps. But it works 😃.
+Basically it sorts files before directories if the names match.
 
 Take this example directory structure:
 
@@ -164,7 +185,8 @@ Take this example directory structure:
     └── goodbye.rs
 ```
 
-If you commit this and look at the tree object for `src` you’ll see something like:
+If you commit this and look at the tree object for `src` you’ll see something
+like:
 
 ```sh
 $ git cat-file -p 38089d625d022e1cc25de9fe2c0b34335427e195
@@ -177,7 +199,16 @@ Note that `command.rs` is before `command`.
 
 ## Refactoring writing objects
 
-To support re-using the blob object writing I implemented way back in Part 2, I refactored to allow passing the type of the object being written. The `HashObjectArgs` structure already had a field or the type of object, and whether the -w option was passed to git hash-object. So I make use of that here by creating and passing an instance of it to `hash_object::hash_object()` along with a temp file containing the contents of the `blob` or `tree` object. The main refactoring was to have `hash_object()` pass the `HashObjectArgs` on to `hash_object::encode_content()` to use the object type when creating the header. Before it had been hard-coded to “blob”. Note that this refactoring will of course come in handy for supporting `git commit-tree`.
+To support re-using the blob object writing I implemented way back in Part 2, I
+refactored to allow passing the type of the object being written. The
+`HashObjectArgs` structure already had a field or the type of object, and
+whether the -w option was passed to git hash-object. So I make use of that here
+by creating and passing an instance of it to `hash_object::hash_object()` along
+with a temp file containing the contents of the `blob` or `tree` object. The
+main refactoring was to have `hash_object()` pass the `HashObjectArgs` on to
+`hash_object::encode_content()` to use the object type when creating the header.
+Before it had been hard-coded to “blob”. Note that this refactoring will of
+course come in handy for supporting `git commit-tree`.
 
 ```rust
 fn encode_content(args: &HashObjectArgs, input: &mut File, output: &NamedTempFile) -> GitResult<String> {
@@ -194,20 +225,28 @@ And that’s really it for writing tree objects!
 
 ## Creating a commit object
 
-Compared to some of the other things I’ve had to implement, creating a commit object was relatively straightforward. It was really about hooking together bits I’ve already implemented. There is no fancy formatting beyond the standard header/content split and as I just mentioned, we already have a way to create those objects via `hash_object::hash_object()`.
+Compared to some of the other things I’ve had to implement, creating a commit
+object was relatively straightforward. It was really about hooking together bits
+I’ve already implemented. There is no fancy formatting beyond the standard
+header/content split and as I just mentioned, we already have a way to create
+those objects via `hash_object::hash_object()`.
 
 > [!info]
 > One refactoring I will probably do is move this object-writing stuff from
 > hash_object module to object module, since that’s where I have the object
 > reading stuff. But I haven’t done that yet.
 
-One thing I did to simplify this implementation for now is to only support three command line options.
+One thing I did to simplify this implementation for now is to only support three
+command line options.
 
 - `-p` for the parent
 - `-m` for the commit message
 - hash to specify the tree we’re committing
 
-Also, with `commit-tree` you can have multiple parents (or none) so you could have multiple `-p` (think merges). I am only supporting one parent. You can also have multiple `-m` for multiple commit messages, one paragraph per `-m`. I am also not handling that currently.
+Also, with `commit-tree` you can have multiple parents (or none) so you could
+have multiple `-p` (think merges). I am only supporting one parent. You can also
+have multiple `-m` for multiple commit messages, one paragraph per `-m`. I am
+also not handling that currently.
 
 To view the commit format you can do
 
@@ -220,7 +259,10 @@ committer Ray Suliteanu <raysuliteanu@gmail.com> 1728327330 -0700
 test
 ```
 
-There is always an extra newline (0xA) after the committer. The timestamps you see are the standard Unix epoch value in seconds with the UTC offset. The author and committer names come from the Git config, if set, with a fallback to `user.email` and `user.name`.
+There is always an extra newline (0xA) after the committer. The timestamps you
+see are the standard Unix epoch value in seconds with the UTC offset. The author
+and committer names come from the Git config, if set, with a fallback to
+`user.email` and `user.name`.
 
 ```rust
 pub(crate) fn commit_tree_command(args: CommitTreeArgs) -> GitCommandResult {
@@ -291,10 +333,13 @@ pub(crate) fn commit_tree_command(args: CommitTreeArgs) -> GitCommandResult {
 }
 ```
 
-I covered a bit on the Git config support in [Part 1](https://medium.com/gitconnected/learning-git-internals-with-rust-96d05592b902). Take a look at that if you want to see where the `GIT_CONFIG` is implemented.
+I covered a bit on the Git config support in
+[Part 1](https://medium.com/gitconnected/learning-git-internals-with-rust-96d05592b902).
+Take a look at that if you want to see where the `GIT_CONFIG` is implemented.
 
 Above, when I call `GitObject::read()` I do this to validate that the values
-provided by the user on the command line are valid hashes. If they are not `read()` returns an `Err`.
+provided by the user on the command line are valid hashes. If they are not
+`read()` returns an `Err`.
 
 To get the timezone value I used the `chrono` crate, partly just to learn a little
 about it vs. the standard library. The timestamp is just using the `std::time`
@@ -310,3 +355,13 @@ fn get_tz() -> String {
 ```
 
 And there you have `git commit-tree`.
+
+---
+
+As always, please comment if you notice anything I could do better with
+my Rust coding as I'm doing this to learn Rust better. If there are
+idiomatic things that I could do that I'm not, let me know! And any
+other comments on the content or possible future content, let me know!
+
+If you enjoyed this content, and you'd like to support me, consider
+[buying me a coffee](https://www.buymeacoffee.com/raysuliteanu)

@@ -1,13 +1,13 @@
 ---
-title: Learning Git Internals with Rust
-description: Part 3 - Rust refactoring
+title: Learning Git Internals with Rust - Part 3
+description: Rust refactoring
 date: 08-20-2024
 tags:
   - git
   - rust
   - programming
   - blog
-draft: true
+draft: false
 ---
 
 In this post we continue our journey with Rust and Git. If you haven't read the
@@ -31,16 +31,32 @@ single `main.rs` file and refactor it into several files. I will create a
 within `commands`. I will also separate out utility functions into a `util`
 module.
 
-TODO: replace figure/gist
+![code refactor](images/learning-git-code-refactor.png)
 
 The directory structure becomes
 
-TODO: replace figure/gist
+![refactored code directory tree](images/learning-git-pt3-dir-tree.png)
 
 The `main()` method becomes extremely
 basic (`use` statements elided).
 
-TODO: replace figure/gist
+```rust
+mod commands;
+mod util;
+
+fn main() -> io::Result<()> {
+    env_logger::init();
+
+    let git = Git::parse();
+
+    match git.command {
+        Commands::Init(args) => init_command(args),
+        Commands::CatFile(args) => cat_file_command(args),
+        Commands::HashObject(args) => hash_object_command(args),
+        Commands::Config(args) => config_command(args),
+    }
+}
+```
 
 You could argue --- based on my module diagram above --- that the `mod util`
 belongs in `commands/mod.rs` which is probably valid. I left it as it is for
@@ -56,7 +72,26 @@ The `commands` module defined in `commands/mod.rs` is also relatively simple at
 this point. Other than defining the other command modules, it has the `struct
 Git` and `enum Commands` types.
 
-TODO: replace figure/gist
+```rust
+pub(crate) mod cat_file;
+pub(crate) mod config;
+pub(crate) mod hash_object;
+pub(crate) mod init;
+
+#[derive(Debug, Parser)]
+pub(crate) struct Git {
+    #[command(subcommand)]
+    pub(crate) command: Commands,
+}
+
+#[derive(Debug, Subcommand)]
+pub(crate) enum Commands {
+    Init(InitArgs),
+    CatFile(CatFileArgs),
+    HashObject(HashObjectArgs),
+    Config(ConfigArgs),
+}
+```
 
 Then as shown above, we have a file for each command module. Each module has
 the implementation details for the specific command, moved from the old
@@ -74,7 +109,21 @@ The `hash_object` command is one example. The `generate_hash()` and
 `encode_obj_content()` methods are completely generic, but I've left them where
 they are for now.
 
-TODO: replace figure/gist
+```rust
+fn generate_hash(content: &[u8]) -> String {
+    let mut hasher = Sha1::new();
+    hasher.update(content);
+    let sha1_hash = hasher.finalize();
+    hex::encode(sha1_hash)
+}
+
+fn encode_obj_content(content: &[u8]) -> io::Result<Vec<u8>> {
+    let mut encoder = ZlibEncoder::new(Vec::new(), Compression::default());
+    encoder.write_all(content)?;
+    let result = encoder.finish()?;
+    Ok(result)
+}
+```
 
 That about covers the refactoring. Now we'll get back to Git ... next blog will
 cover the `cat-file` command as I had indicated in Part 2.
@@ -85,3 +134,6 @@ As always, please comment if you notice anything I could do better with
 my Rust coding as I'm doing this to learn Rust better. If there are
 idiomatic things that I could do that I'm not, let me know! And any
 other comments on the content or possible future content, let me know!
+
+If you enjoyed this content, and you'd like to support me, consider
+[buying me a coffee](https://www.buymeacoffee.com/raysuliteanu)
