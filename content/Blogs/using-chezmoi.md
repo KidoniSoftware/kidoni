@@ -153,9 +153,36 @@ ray@kidoni:~$ git remote add origin https://github.com/<youruser>/dotfiles.git
 ray@kidoni:~$ git push -u origin main
 ```
 
-There is also a chezmoi command you can use from any directory, without having
-to be in the chezmoi directory as you would if you use `git` directly. This is
-`chezmoi push`.
+> [!note] Correction
+> In the original version of this post I said that there was a builtin chezmoi
+> command 'push' (e.g. `chezmoi push`) to push git changes to your remote. This
+> was incorrect. I had an alias for that: `alias cpush='chezmoi git push'`.
+
+You do not need to be in the chezmoi directory to use Git commands. You can use
+`chezmoi git` to execute git commands as if you were in the chezmoi directory:
+
+```bash
+ray@kidoni:~$ chezmoi git log
+commit 3a69491e882710e646a7ca074488abe4b9058b39 (HEAD -> master)
+Author: Example Dev <example@example.dev>
+Date:   Fri Jan 17 14:26:08 2025 -0800
+
+    Update .config/starship.toml
+
+commit 040eb1293c1d8a983f2b8c76ba0f3c82d06924b3
+Author: Example Dev <example@example.dev>
+Date:   Fri Jan 17 14:25:52 2025 -0800
+
+    Update .bashrc
+    Add .config/starship.toml
+    Add .gitconfig
+
+commit dc461350919b6f74e3c524bde713e85cf14bb5bf
+Author: Example Dev <example@example.dev>
+Date:   Fri Jan 17 14:14:26 2025 -0800
+
+    initial commit
+```
 
 #### Initializing from Git
 
