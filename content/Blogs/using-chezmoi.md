@@ -156,7 +156,8 @@ ray@kidoni:~$ git push -u origin main
 > [!note] Correction
 > In the original version of this post I said that there was a builtin chezmoi
 > command 'push' (e.g. `chezmoi push`) to push git changes to your remote. This
-> was incorrect. I had an alias for that: `alias cpush='chezmoi git push'`.
+> was incorrect. I had an alias for that: `alias cpush='chezmoi git push'` which
+> made me think there was a `chezmoi push`.
 
 You do not need to be in the chezmoi directory to use Git commands. You can use
 `chezmoi git` to execute git commands as if you were in the chezmoi directory:
