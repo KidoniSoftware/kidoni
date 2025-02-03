@@ -34,5 +34,3 @@ want to teach myself how to write a native kernel for it in Rust.
 
 Stay tuned for additional content and features, like signing up for a
 notification when new blogs are posted.
-
----
