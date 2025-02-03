@@ -6,7 +6,7 @@ export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [],
   afterBody: [
-    Component.MobileOnly(Component.Explorer({ title: "Blogs", })),
+    Component.Explorer({ title: "Blogs", }),
     Component.Comments({
       provider: 'giscus',
       options: {
@@ -39,15 +39,11 @@ export const defaultContentPageLayout: PageLayout = {
     Component.ContentMeta(),
     Component.TagList(),
   ],
-  // afterBody: [
-  //   Component.MobileOnly(Component.Explorer({ title: "Blogs", })),
-  // ],
   left: [
     Component.PageTitle(),
     Component.MobileOnly(Component.Spacer()),
     Component.Search(),
     Component.Darkmode(),
-    Component.DesktopOnly(Component.Explorer({ title: "Blogs", })),
   ],
   right: [
     Component.Graph(),
@@ -64,7 +60,6 @@ export const defaultListPageLayout: PageLayout = {
     Component.MobileOnly(Component.Spacer()),
     Component.Search(),
     Component.Darkmode(),
-    Component.DesktopOnly(Component.Explorer({ title: "Blogs", })),
   ],
   right: [],
 }
