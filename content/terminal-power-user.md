@@ -396,7 +396,7 @@ it with a simpler interface than `curl`. The command itself is called `http`.
 
 The best way to describe it is to show some examples.
 
-- a simple GET request
+- a simple GET request - note the pretty-printed JSON by default
 
 ```bash
 $ http httpbin.org/stream/1
@@ -405,14 +405,27 @@ Access-Control-Allow-Credentials: true
 Access-Control-Allow-Origin: *
 Connection: keep-alive
 Content-Type: application/json
-Date: Fri, 07 Feb 2025 00:08:30 GMT
+Date: Fri, 07 Feb 2025 18:56:56 GMT
 Server: gunicorn/19.9.0
 Transfer-Encoding: chunked
 
-{"url": "http://httpbin.org/stream/5", "args": {}, "headers": {"Host": "httpbin.org", "X-Amzn-Trace-Id": "Root=1-67a54efe-361e037e6b2343922ced917c", "Accept-Encoding": "gzip, deflate", "Accept": "*/*", "User-Agent": "HTTPie/3.2.4"}, "origin": "193.19.109.186", "id": 0}
+{
+    "args": {},
+    "headers": {
+        "Accept": "*/*",
+        "Accept-Encoding": "gzip, deflate",
+        "Host": "httpbin.org",
+        "User-Agent": "HTTPie/3.2.4",
+        "X-Amzn-Trace-Id": "Root=1-67a65778-119ef1ea5fcfc82a60ef63ef"
+    },
+    "id": 0,
+    "origin": "193.19.109.180",
+    "url": "http://httpbin.org/stream/1"
+}
 ```
 
-- passing a custom header
+- passing a custom header - just use a name:value pair (`-v` to show the
+  request headers, which by default are omitted)
 
 ```bash
 $ http -v httpbin.org/status/200 X-Custom:1234
@@ -427,7 +440,7 @@ X-Custom: 1234
 <snip>
 ```
 
-- posting data
+- posting data - add name=value pairs; hierarchical data is supported as well
 
 ```bash
 $ http -v POST httpbin.org/status/201 field1=data field2=moredata field3="even more data"
@@ -449,7 +462,8 @@ User-Agent: HTTPie/3.2.4
 <snip>
 ```
 
-- passing a query string
+- passing a query string - use name==value pairs, and no need to pass (and escape)
+  `&` characters
 
 ```bash
 $ http -v httpbin.org/status/200 q==foo bar==baz
@@ -518,7 +532,8 @@ The last example in its own TL;DR is fun, giving the TL;DR for a random command.
 
 ## TUIs
 
-Now we're getting into some full-screen terminal applications.
+Now we're getting into some full-screen terminal applications. You can really
+see the power of the terminal with these tools.
 
 ### top replacements
 
