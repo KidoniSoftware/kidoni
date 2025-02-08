@@ -33,9 +33,12 @@ and of themselves, I'm not going to cover them here. Perhaps in a future post I
 will discuss terminal emulators, but for now, I'm going to focus on tools that
 run within the terminals. Similarly I'm not going to cover shells, since I feel
 that choice of shell is someone like a choice of IDE - it can be a very
-religious discussion.
+religious discussion. Nor will I cover editors, since that could be a blog in
+itself. Finally, one terminal tool that deserves mention, though I won't do more
+than mention it here, is [tmux](https://github.com/tmux/tmux/wiki). I think it
+is indispensable, even with man terminal emulators providing similar features.
 
-I've separated the tools into two categories:
+So with that out of the way, I've separated the tools into two categories:
 
 - CLIs: tools that (for the most part) "just" output text to the terminal
 - TUIs: tools that "take over" and render a user interface within the terminal
