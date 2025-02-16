@@ -103,6 +103,8 @@ return {
 or, using the plugin itself to take a screenshot of the contents ...
 ![nvim-silicon](images/nvim-silicon.lua-20250215-204607.png)
 
+Which looks better?
+
 ### Plugin configuration
 
 Let me explain some of the things I changed from the default.
