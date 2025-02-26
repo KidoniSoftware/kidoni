@@ -31,13 +31,6 @@ export const sharedPageComponents: SharedLayout = {
   }),
 }
 
-const recentNotes = Component.RecentNotes({
-  title: "Recent Updates",
-  limit: 5,
-  showTags: false,
-  linkToMore: "tags/blog" as SimpleSlug,
-})
-
 // components for pages that display a single page (e.g. a single note)
 export const defaultContentPageLayout: PageLayout = {
   beforeBody: [
@@ -50,7 +43,12 @@ export const defaultContentPageLayout: PageLayout = {
     Component.PageTitle(),
     Component.MobileOnly(Component.Spacer()),
     Component.Search(),
-    recentNotes,
+    Component.RecentNotes({
+      title: "Recent Updates",
+      limit: 5,
+      showTags: false,
+      linkToMore: "tags/blog" as SimpleSlug,
+    }),
     Component.Darkmode(),
   ],
   right: [
@@ -68,7 +66,6 @@ export const defaultListPageLayout: PageLayout = {
     Component.MobileOnly(Component.Spacer()),
     Component.Search(),
     Component.Darkmode(),
-    recentNotes,
   ],
   right: [],
 }
