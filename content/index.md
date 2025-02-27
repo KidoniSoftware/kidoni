@@ -18,8 +18,8 @@ at Amdahl Corporation. Eventually I transitioned to writing
 enterprise #java software in the fraud prevention space applying neural networks
 and other #ml techniques to catch bad guys. Applying AI/ML to fraud prevention and
 financial crime has been a theme in my career, using it in areas such as credit
-card fraud, application/origination fraud, anti-money laundering (#aml),
-know-your-customer (#kyc), and identity verification.
+card fraud, application/origination fraud, anti-money laundering #aml,
+know-your-customer #kyc, and identity verification.
 
 More recently I have been learning #rust and going back to my roots, to apply Rust
 to systems level programming. For example, I've purchased a Raspberry Pi 5 and
