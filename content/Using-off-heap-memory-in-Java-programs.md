@@ -9,8 +9,6 @@ tags:
 draft: false
 ---
 
-## Using off-heap memory in Java
-
 One of the nice things about modern programming languages is Garbage
 Collection. As a developer you don't have to worry much about allocating
 and freeing memory for your objects. With Java you just 'new' your class

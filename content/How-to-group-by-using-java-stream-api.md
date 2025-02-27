@@ -9,8 +9,6 @@ tags:
 draft: false
 ---
 
-## How to "group by" using Java Stream API
-
 Recently I was trying to do essentially a "map-reduce" using the Java
 Stream API ... counting the number of occurrences of words in some
 input. This wasn't for some huge "big data" input set. Using Java Stream

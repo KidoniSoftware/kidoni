@@ -12,8 +12,6 @@ tags:
 draft: false
 ---
 
-## Building cloud software? Don't forget about this
-
 When developers set out to architect a piece of software --- whether a
 brand new green-field project or rearchitecting an existing product --- the
 typical considerations are things like

@@ -10,8 +10,6 @@ tags:
 draft: false
 ---
 
-## Using Protocol Buffers to serialize to off-heap memory
-
 In my previous post about [Using off-heap memory in Java programs](Using-off-heap-memory-in-Java-programs)
 I showed how to set up a memory-mapped file. Now that
 we have a memory-mapped file, let's write something to the file. There

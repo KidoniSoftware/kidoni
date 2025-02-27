@@ -11,8 +11,6 @@ tags:
 draft: false
 ---
 
-## Java's fork-join framework
-
 Since Java 7, the JDK includes a set of classes implementing a fork-join
 pattern. This is an approach decomposing work into multiple tasks that
 can be executed in parallel. Java provides `ForkJoinPool` and `ForkJoinTask` as
