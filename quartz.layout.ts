@@ -7,6 +7,11 @@ export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [],
   afterBody: [
+    Component.MobileOnly(Component.RecentNotes({
+      title: "Recent Updates",
+      showTags: false,
+      linkToMore: "tags/blog" as SimpleSlug,
+    })),
     Component.Comments({
       provider: 'giscus',
       options: {
@@ -43,12 +48,12 @@ export const defaultContentPageLayout: PageLayout = {
     Component.PageTitle(),
     Component.MobileOnly(Component.Spacer()),
     Component.Search(),
-    Component.RecentNotes({
+    Component.DesktopOnly(Component.RecentNotes({
       title: "Recent Updates",
       limit: 5,
       showTags: false,
       linkToMore: "tags/blog" as SimpleSlug,
-    }),
+    })),
     Component.Darkmode(),
   ],
   right: [
