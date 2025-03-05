@@ -182,7 +182,7 @@ t
 
 Let's fill in the details of the `split` method.
 
-```jasva
+```java
 public static <T> Gatherer<T, ?, List<T>> split(Predicate<? super T> predicate) {
     class SplitState {
         final List<T> list = new ArrayList<>();
