@@ -48,13 +48,13 @@ export const defaultContentPageLayout: PageLayout = {
     Component.PageTitle(),
     Component.MobileOnly(Component.Spacer()),
     Component.Search(),
+    Component.Darkmode(),
     Component.DesktopOnly(Component.RecentNotes({
       title: "Recent Updates",
       limit: 5,
       showTags: false,
       linkToMore: "tags/blog" as SimpleSlug,
     })),
-    Component.Darkmode(),
   ],
   right: [
     Component.Graph(),
