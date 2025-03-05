@@ -176,8 +176,6 @@ On the other hand, if we used `split` instead of `splitn`, the output would be:
 50
 ```
 
-t
-
 ### Implementing split
 
 Let's fill in the details of the `split` method.
