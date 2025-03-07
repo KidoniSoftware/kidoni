@@ -23,15 +23,21 @@ card fraud, application/origination fraud, anti-money laundering #aml,
 know-your-customer #kyc, and identity verification.
 
 More recently I have been learning #rust and going back to my roots, to apply Rust
-to systems level programming. For example, I've purchased a Raspberry Pi 5 and
-want to teach myself how to write a native kernel for it in Rust.
+to systems level programming. I've done your stereotypical "blinky" app on a
+[microbit](https://microbit.org/) and I have a Raspberry Pi 5 that I want to
+use to practice writing a native kernel on it in Rust.
 
-> [!note]
-> Please bear with me as I migrate my blog posts from my existing [Medium](https://raysuliteanu.medium.com)
-> site to this self-hosted, self-managed and free site. Because I am removing
-> the paywall, please consider
-> [buying me a coffee](https://www.buymeacoffee.com/raysuliteanu) if you enjoy
-> the content! I will probably also set up a GitHub sponsor link.
+### Migrating from Medium
+
+I have migrated my blog posts from my existing [Medium](https://raysuliteanu.medium.com)
+site to this self-hosted, self-managed and _free_ site. This site is built using
+[Quartz](https://quartz.jzhao.xyz/). Perhaps I will write a blog post about the
+migration! If that's of interest, send me a comment below.
+
+## Support
+
+If you gain anything from these blogs and feel like supporting me in some way,
+consider [buying me a coffee](https://www.buymeacoffee.com/raysuliteanu).
 
 Stay tuned for additional content and features, like signing up for a
 notification when new blogs are posted.
