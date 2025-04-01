@@ -36,7 +36,7 @@ data on that port at that address. If you want to send data to another UDP
 socket, you bind to that address and port, then connect one to the other.
 
 Obviously the typical usage would be for sending messages between processes. In
-this simple "quick byte" example though, to keep it simple, I will just send
+this simple "quick byte" example though, I will just send
 a message between threads in the same process. Ignoring the threading aspects
 and focusing on the UDP parts, notice that I'm using `0` as the port in the
 IP address: `127.0.0.1:0`. This tells the OS to pick a random port for me (and
