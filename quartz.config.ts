@@ -13,7 +13,8 @@ const config: QuartzConfig = {
     enableSPA: true,
     enablePopovers: true,
     analytics: {
-      provider: "plausible",
+      provider: "google",
+      tagId: "G-X783PXP90Q"
     },
     locale: "en-US",
     baseUrl: "kidoni.dev",
