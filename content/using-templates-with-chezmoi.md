@@ -33,11 +33,11 @@ custom functions it's created as well as using functions from [sprig](https://ma
 You can use branching logic with if/else and there are various boolean logic
 comparisons like 'not equal', 'greater than', etc.
 
-## Creating a template
+## Creating A Template
 
 There are a few ways to create a template.
 
-### Empty template
+### Empty Template
 
 If you want to create a new empty template just do so manually in the
 `.chezmoitemplates` directory:
@@ -51,7 +51,7 @@ $ vi mytemplate
 
 Template files in `.chezmoitemplates` do not need any special extension.
 
-### Adding a new file to manage
+### Adding A New File To Manage
 
 If you're adding a new file for `chezmoi` to manage, pass `--template` when
 adding the file:
@@ -62,7 +62,7 @@ chezmoi add --template ~/.gitconfig
 
 This will create a file `dot_gitconfig.tmpl` in the `chezmoi` source directory.
 
-### Turning an existing file into a template
+### Turning An Existing File Into A Template
 
 If you want to make a file that is already managed by `chezmoi` into a template,
 you use the `chezmoi chattr` command:
@@ -73,12 +73,12 @@ chezmoi chattr +template ~/.zshrc
 
 This will change `dot_zshrc` into `dot_zshrc.tmpl`.
 
-## Using template data and syntax
+## Using Template Data And Syntax
 
 Now that we have a template file, let's see some examples of leveraging the
 template language and available data and functions to customize our configuration.
 
-### Template data
+### Template Data
 
 `chezmoi` exposes many data attributes from your system. For a full list, use
 the `chezmoi data` command:
@@ -105,7 +105,7 @@ $ chezmoi execute-template "host: {{ .chezmoi.hostname }} os: {{ .chezmoi.os }}"
 host: kidoni os: linux
 ```
 
-#### Custom (user-defined) data
+#### Custom (user-defined) Data
 
 You can also create your own data values to use in your templates. You place
 these in your `chezmoi` configuration file e.g. `~/.config/chezmoi/chezmoi.toml`.
@@ -137,7 +137,7 @@ $ chezmoi execute-template "cnt: {{ .foo.cnt }}  name: {{ .bar.name }}"
 cnt: 10  name: ray
 ```
 
-## Template logic and functions
+## Template Logic And Functions
 
 We can create our templates and we can access data, so now let's put in some logic
 to control what we configure based on the various data available.
@@ -184,7 +184,7 @@ have two Linux systems with different host names, I can do something like
 {{ end }}
 ```
 
-#### Using Sprig functions
+### Using Sprig Functions
 
 As mentioned, you can use any of the `sprig` functions in your templates. There
 are a lot of functions and a lot of use cases, so I won't spend time trying to
@@ -200,7 +200,7 @@ $ chezmoi execute-template '{{ replace  "/" "\\" .chezmoi.sourceDir}}'
 \home\ray\.local\share\chezmoi
 ```
 
-## Combining fragments into a larger template
+## Combining Fragments Into A Larger Template
 
 As mentioned at the start, you can put files in `.chezmoitemplates` and one
 use for that is to store pieces of templates that you want to include into
