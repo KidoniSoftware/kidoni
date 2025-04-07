@@ -4,6 +4,7 @@ description: how I have set up chezmoi to manage my dotfiles
 date: 2025-01-09
 tags:
   - blog
+  - chezmoi
   - dotfiles
 draft: false
 ---
