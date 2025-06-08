@@ -6,11 +6,34 @@ import { SimpleSlug } from "./quartz/util/path"
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [],
-  afterBody: [],
+  afterBody: [
+    Component.MobileOnly(
+      Component.RecentNotes({
+        title: "Recent Updates",
+        showTags: false,
+        linkToMore: "tags/blog" as SimpleSlug,
+      }),
+    ),
+    Component.Comments({
+      provider: "giscus",
+      options: {
+        // from data-repo
+        repo: "kidonisoftware/kidoni",
+        // from data-repo-id
+        repoId: "R_kgDONduRGw",
+        // from data-category
+        category: "Announcements",
+        // from data-category-id
+        categoryId: "DIC_kwDONduRG84ClO6M",
+        inputPosition: "top",
+      },
+    }),
+  ],
   footer: Component.Footer({
     links: {
-      GitHub: "https://github.com/jackyzha0/quartz",
-      "Discord Community": "https://discord.gg/cRFFHYye7t",
+      GitHub: "https://github.com/raysuliteanu",
+      LinkedIn: "https://linkedin.com/in/raysuliteanu",
+      "Buy me a coffee": "https://www.buymeacoffee.com/raysuliteanu",
     },
   }),
 }
