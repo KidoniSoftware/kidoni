@@ -437,7 +437,7 @@ methods.
 go install github.com/mhersson/mpls@latest
 ```
 
-> > Make sure the resulting `mpls` executable is in your PATH
+> Make sure the resulting `mpls` executable is in your PATH
 
 The limitation described above about executing `cargo` tests exists here as
 well - the key binding of `M` is not specific to Markdown files, so if you
