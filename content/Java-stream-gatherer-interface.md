@@ -185,7 +185,7 @@ public static <T> Gatherer<T, ?, List<T>> split(Predicate<? super T> predicate) 
     class SplitState {
         final List<T> list = new ArrayList<>();
         boolean did_push;
-    }    u
+    }
 
     return Gatherer.ofSequential(
             SplitState::new,
