@@ -66,9 +66,10 @@ directory in the root of the source tree. What I decided to do is do a regular
 resulting binary.
 
 ```sh
-$ cargo build --release
-$ HELIX_RUNTIME=$(pwd)/runtime target/release/hx        [1]
+cargo build --release
+HELIX_RUNTIME=$(pwd)/runtime target/release/hx        [1]
 ```
+
 > [1] is what I have a script to do, effectively; the main point is, set the
 > HELIX_RUNTIME environment, whether in a script, manually as shown above, or
 > via an shell RC file or equivalent.
@@ -108,6 +109,7 @@ FLAGS:
     -w, --working-dir <path>       Specify an initial working directory
     +N                             Open the first given file at line number N
 ```
+
 One flag I felt was missing was the `-R` like in NeoVim to open the file(s)
 read-only. There also isn't a way (that I know of) to run an `hx` command on
 startup like in NeoVim. I do recommend the tutorial, which you can open from
@@ -141,18 +143,18 @@ the biggest differences in the next [section](#actionselection-vs-selectionactio
 but some things that continue to trip up my muscle memory are:
 
 - moving to the beginning and end of line are different. The differences make
-sense, but still trip one up. To move to the beginning of a line you use `gh`.
-To move to the end of a line you use `gl`.
+  sense, but still trip one up. To move to the beginning of a line you use `gh`.
+  To move to the end of a line you use `gl`.
 - while moving to the beginning of a file is the same as with `gg`;
-however, moving to the end of the file is `ge` not `G`.
+  however, moving to the end of the file is `ge` not `G`.
 - pasting with `p` and `P` as I mentioned earlier is the same ... except that
-that is for pasting what was yanked from within `hx`. If you have configured
-`hx` to support the system clipboard, pasting from there is `<sp>p` or `<sp>P`.
+  that is for pasting what was yanked from within `hx`. If you have configured
+  `hx` to support the system clipboard, pasting from there is `<sp>p` or `<sp>P`.
 - `x` in `hx` selects the current line, rather than deleting the current
-character as in . Instead you use `d` to delete a character (which makes
-more sense).
+  character as in . Instead you use `d` to delete a character (which makes
+  more sense).
 - while `c` is the same to perform a change, `C` is not the same. See the
-discussion of multi-cursors later.
+  discussion of multi-cursors later.
 
 > Helix has an equivalent to NeoVim's `which-key` plugin built-in, to provide
 > menu-like information about available keybindings. But Helix also provides
@@ -173,12 +175,12 @@ use to. One thing stays the same ... mostly: just as in NeoVim, Helix supports
 adding a number with the selection to select multiple things, but you have to
 explicitly be in `select` mode first.
 
-| hx    | nvim | Description |
-| --    | ---- | ----------- |
-| wc    | cw   | change word from cursor to end of word |
+| hx    | nvim | Description                                            |
+| ----- | ---- | ------------------------------------------------------ |
+| wc    | cw   | change word from cursor to end of word                 |
 | v3wc  | 3cw  | change word from the cursor to the end of the 3rd word |
-| rc    | rc   | change the current character to an 'c' |
-| v3lrc | 4rc  | replace 4 characters with the letter 'c' |
+| rc    | rc   | change the current character to an 'c'                 |
+| v3lrc | 4rc  | replace 4 characters with the letter 'c'               |
 
 Some things in Helix are more consistent, dropping baggage in NeoVim from its
 parentage. For example, to delete the current line, it's still `selection`/`action`
@@ -234,12 +236,12 @@ bar
 baz
 ```
 
-Let's say we wanted to make it into an unordered list in Markdown i.e. add `- `
+Let's say we wanted to make it into an unordered list in Markdown i.e. add `-`
 in front of each line. In Helix, (once your cursor is on `f` of `foo`) you
-would do `2Ci- `. In NeoVim, it would seem I could use `<ctrl>v2ji- ` but at
+would do `2Ci-`. In NeoVim, it would seem I could use `<ctrl>v2ji-` but at
 least for me it doesn't work. On the other hand, I can use `<ctrl>v` to replace
 selected characters. In Helix it's consistent - to replace rather than insert,
-just use `r` rather than `i`: `2Cr_` to replace selected characters with '_'.
+just use `r` rather than `i`: `2Cr_` to replace selected characters with '\_'.
 
 ## Multi-selection features
 
@@ -248,9 +250,10 @@ operate on them all at the same time. Effectively you're using a search to
 determine how to create multiple cursors.
 
 Let's say you wanted to change every word "helix" to "hx" in this whole document.
+
 - select the entire document e.g. `v%` or `x%`
 - use the `s` command which will show `select:` in the status line, prompting
-what to search for
+  what to search for
 - enter `helix` and press `<enter>`
 - this will create a cursor at each occurence of the word
 - use `c` to indicate the change action and type `hx`
@@ -275,6 +278,7 @@ Stop|Stop it
 Restart|Restart it
 Kill|Kill it
 ```
+
 You want to "right align" the commands so the text looks like
 
 ```text
@@ -284,6 +288,7 @@ Commands|Description
  Restart|Restart it
     Kill|Kill it
 ```
+
 What you would do is move your cursor to the start of the line with "Commands"
 and do `4Cw&`.
 
@@ -310,6 +315,7 @@ text color coding, while Helix has plain text e.g 'module', 'method':
 ![code symbols](images/hx-vs-nvim-code-symbols.png)
 
 Even so, as a full IDE Helix still has some way to go:
+
 - you can't run your application
 - you can't debug
 - you can't run tests
@@ -358,13 +364,13 @@ each project, though you could script that to symlink them all to the same file
 you place somewhere.
 
 ```sh
-$ cd ~/src
-$ mkdir .helix && cd .helix
-$ hx config-rust.toml # put your `cargo test` and any other `cargo` bindings here
-$ hx config-mvn.toml # put your `mvn test` and any other `mvn` bindings here
-$ hx config-gradle.toml # put your `gradle test` and any other `gradle` bindings here
-$ cd ~/src/my-rust-project
-$ setup-helix-config.sh rust
+cd ~/src
+mkdir .helix && cd .helix
+hx config-rust.toml # put your `cargo test` and any other `cargo` bindings here
+hx config-mvn.toml # put your `mvn test` and any other `mvn` bindings here
+hx config-gradle.toml # put your `gradle test` and any other `gradle` bindings here
+cd ~/src/my-rust-project
+setup-helix-config.sh rust
 ```
 
 ```sh
@@ -428,10 +434,10 @@ I had go installed already so I used that method, but there are other download
 methods.
 
 ```sh
-$ go install github.com/mhersson/mpls@latest
+go install github.com/mhersson/mpls@latest
 ```
 
->> Make sure the resulting `mpls` executable is in your PATH
+> > Make sure the resulting `mpls` executable is in your PATH
 
 The limitation described above about executing `cargo` tests exists here as
 well - the key binding of `M` is not specific to Markdown files, so if you
@@ -447,15 +453,15 @@ Some things are not implemented yet in Helix. Obviously it's a newer project.
 
 - you have to install LSPs manually. There is no equivalent to Mason.
 - as I alluded to earlier, there is no terminal support or mode within Helix;
-you'll have to use a terminal multiplexer like `tmux` or features from your shell
-for splits or tabs
+  you'll have to use a terminal multiplexer like `tmux` or features from your shell
+  for splits or tabs
 - only basic Git support and no other VCSs
 - no plugin system
 - while some configuration is simpler in Helix, as discussed above, there are
-still limitations, both in terms of what is configurable and how configurable
-it is.
+  still limitations, both in terms of what is configurable and how configurable
+  it is.
 
-# Summing Up
+## Summing Up
 
 I hope this gives a feel for Helix as it stands as of this writing, version
 25.01.1. I like Helix. I think there is a lot of promise. That said, it's not
