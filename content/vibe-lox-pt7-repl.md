@@ -14,6 +14,9 @@ tags:
 draft: false
 ---
 
+> [!note] Written with AI
+> This post — and all the code behind it — was built with [Claude Code](https://claude.ai/claude-code). Read [Part 0](vibe-lox-pt0-preamble) for the full story of how this AI-assisted project came together.
+
 Previously in this series: [Part 1 — Introduction](vibe-lox-pt1-introduction), [Part 2 — Tokenization](vibe-lox-pt2-tokenization), [Part 3 — Parsing](vibe-lox-pt3-parsing), [Part 4 — The Tree-Walk Interpreter](vibe-lox-pt4-interpreter), [Part 5 — The Bytecode VM](vibe-lox-pt5-vm), and [Part 6 — LLVM Compilation](vibe-lox-pt6-llvm). This is the final post in the series.
 
 Over six posts we have built the complete compiler pipeline: a winnow-based scanner, a recursive-descent parser, an AST, a tree-walk interpreter, a bytecode VM with its own compiler, and an LLVM IR code generator. What we have not talked about yet is the part that most users will touch first — typing something at a prompt and seeing what happens. This post is about the REPL.

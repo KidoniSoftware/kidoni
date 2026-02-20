@@ -14,6 +14,9 @@ tags:
 draft: false
 ---
 
+> [!note] Written with AI
+> This post — and all the code behind it — was built with [Claude Code](https://claude.ai/claude-code). Read [Part 0](vibe-lox-pt0-preamble) for the full story of how this AI-assisted project came together.
+
 This is part 5 of a series on building a Lox compiler in Rust. Parts 1 through 4 covered the
 language and compiler pipeline ([Part 1](vibe-lox-pt1-introduction)), the tokenizer
 ([Part 2](vibe-lox-pt2-tokenization)), the parser and AST ([Part 3](vibe-lox-pt3-parsing)),
