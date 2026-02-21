@@ -83,3 +83,6 @@ but feel free to jump around based on your interests.
 
 I am very interested to hear any comments or feedback on how you think Claude
 did, both in the code and in the blog posts.
+
+If you gain anything from these blogs and feel like supporting me in some way,
+[consider buying me a coffee](https://www.buymeacoffee.com/raysuliteanu).
