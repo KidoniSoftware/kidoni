@@ -27,7 +27,7 @@ to systems level programming. I've done your stereotypical "blinky" app on a
 [microbit](https://microbit.org/) and I have a Raspberry Pi 5 that I want to
 use to practice writing a native kernel on it in Rust.
 
-My resume is available [here](assets/resume-20250909.pdf).
+My resume is available [here](assets/resume-20260221.pdf).
 
 ### Migrating from Medium
 
