@@ -45,7 +45,7 @@ mentioned). Using Claude to generate full projects, sometimes backend as well as
 the frontend, I could see the models getting better at writing code. But I never
 used Claude 100% for a full project - maybe 100% on the frontend, and 50-80%
 backend at most. Then recently I got the idea - honestly I can't remember now
-why, what prompted (pun semi-intended) it - why not see how Claude does creating
+what prompted (pun semi-intended) it - why not see how Claude does creating
 an implementation of the Lox interpreter/compiler and in doing so, compare to
 what I had written by hand, combined with learning the parts beyond where I'd
 gone myself, like the virtual machine implementation.
@@ -64,11 +64,11 @@ I wanted in the blogs, was to put a notice in each blog back to this introductio
 to make sure everyone reading it knows clearly that I did not write this blog
 series, for full disclosure.
 
-All of the code is on GitHub at <https://github.com/raysuliteanu/vibe-lox/tree/blog-version>
-on the `blog-version` branch (since I will probably continue to iterate on the
+All of the code is on [GitHub](https://github.com/raysuliteanu/vibe-lox/tree/blog-version)
+on the `blog-version` branch, since I will probably continue to iterate on the
 code with Claude for additional features based on my own interests, which of
 course you're free to look at as well, but it may just not match the code
-referenced in the blog series).
+referenced in the blog series.
 
 The blogs are best written in order, particularly if you're new to compilers,
 but feel free to jump around based on your interests.
