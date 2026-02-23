@@ -442,4 +442,4 @@ Every node carries its `type` tag, all child nodes, and its `span`. You can pipe
 
 That covers the parser. We have a token stream going in and a typed, span-annotated, richly-structured Rust value coming out — with all `for` loops already desugared to `while` and multiple errors reported in a single pass.
 
-Next up: the *resolver*. Before the interpreter or the VM can run the program, a single tree-walk pass resolves every variable reference — determining exactly which declaration each identifier refers to, and how many scope levels away it lives. That depth information is stored in a `HashMap<ExprId, usize>`, keyed on those unique expression IDs we just saw. [Part 4](vibe-lox-pt4-resolving) will walk through why this pass is necessary and how it works.
+Next up: the *tree-walk interpreter*. [Part 4](vibe-lox-pt4-interpreter) covers the first execution backend — including the resolver pass that determines exactly which declaration each identifier refers to and how many scope levels away it lives, the scoped environment chain that gives Lox its lexical scoping, closures, and the full OOP runtime for classes and instances.
