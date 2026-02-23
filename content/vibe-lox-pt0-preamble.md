@@ -70,7 +70,7 @@ code with Claude for additional features based on my own interests, which of
 course you're free to look at as well, but it may just not match the code
 referenced in the blog series.
 
-The blogs are best written in order, particularly if you're new to compilers,
+The blogs are best read in order, particularly if you're new to compilers,
 but feel free to jump around based on your interests.
 
 - [Part 1 - Introduction](vibe-lox-pt1-introduction)
