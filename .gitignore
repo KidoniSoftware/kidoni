@@ -13,3 +13,7 @@ blog-template.md
 CLAUDE.md
 content-medium/
 worktrees/
+
+# Python
+__pycache__/
+*.pyc
