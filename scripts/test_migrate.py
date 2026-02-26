@@ -47,6 +47,16 @@ def test_callout_tip():
     result = convert_callouts(lines)
     assert any('type="tip"' in line for line in result)
 
+def test_callout_question():
+    lines = ["> [!question]", "> Is this correct?"]
+    result = convert_callouts(lines)
+    assert any('type="question"' in line for line in result)
+
+def test_callout_important():
+    lines = ["> [!important]", "> Pay attention here."]
+    result = convert_callouts(lines)
+    assert any('type="important"' in line for line in result)
+
 def test_callout_multiline_content():
     lines = [
         "> [!note]",

@@ -489,6 +489,7 @@ distros like LazyVim and its brethren.
 For me personally, I will keep my eye on Helix, but I'm not switching from NeoVim
 (or IntelliJ or RustRover). Maybe I'll try my hand at contributing to Helix.
 
-> [!question]
-> What do you think of Helix? I'd love to hear your experiences! Leave them in
-> the comments.
+{{% callout type="question" %}}
+What do you think of Helix? I'd love to hear your experiences! Leave them in
+the comments.
+{{% /callout %}}

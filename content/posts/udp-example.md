@@ -50,10 +50,12 @@ pretty self-explanatory ... use `recv_from(&mut buf)` to read data and use
 because it reads from the port it's bound to. However, sending data requires the
 address where to send, since that can obviously be anywhere.
 
-> [!important]
-> For the simple example I just return errors from the `main()` method and use
-> the `?` shortcut to return errors. Naturally in a "real" program you would use
-> error handling best practices.
+{{% callout type="important" %}}
+For the simple example I just return errors from the `main()` method and use
+the `?` shortcut to return errors. Naturally in a "real" program you would use
+error handling best practices.
+{{% /callout %}}
+
 
 ```rust
 use std::{error::Error, net::UdpSocket, thread};

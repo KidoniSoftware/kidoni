@@ -13,7 +13,7 @@ import sys
 from pathlib import Path
 
 _CALLOUT_RE = re.compile(
-    r"^> \[!(note|info|warning|tip|danger)\](.*)$", re.IGNORECASE
+    r"^> \[!(note|info|warning|tip|danger|question|important)\](.*)$", re.IGNORECASE
 )
 _WIKILINK_RE = re.compile(r"\[\[([^\]]+)\]\]")
 _IMAGE_PATH_RE = re.compile(
