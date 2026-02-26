@@ -1,7 +1,7 @@
 ---
 title: Learning Git Internals with Rust - Part 2
 description: Git Objects
-date: 07-30-2024
+date: 2024-07-30
 tags:
   - git
   - rust

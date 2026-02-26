@@ -78,6 +78,10 @@ menu:
       weight: 40
 
 markup:
+  goldmark:
+    renderer:
+      # Allow raw HTML passthrough from authored content (trusted source)
+      unsafe: true
   highlight:
     noClasses: false
     anchorLineNos: false

@@ -79,7 +79,7 @@ ray@kidoni:~$ ls -a
 
 You are now ready to add whatever config you want to manage with chezmoi.
 
-{{% callout type="info" title="An aside on the "architecture" of chezmoi." %}}
+{{% callout type="info" title="An aside on the architecture of chezmoi." %}}
 Chezmoi has a source state and a
 target state. The source state is the content stored in ~/.local/share/chezmoi
 while the target state is the content in your filesystem where the "real" files
