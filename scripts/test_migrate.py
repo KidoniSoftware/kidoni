@@ -34,18 +34,18 @@ def test_callout_info_with_title():
         "> Some info content.",
     ]
     result = convert_callouts(lines)
-    assert 'type="info"' in result
-    assert 'title="An aside on the architecture."' in result
+    assert any('type="info"' in line for line in result)
+    assert any('title="An aside on the architecture."' in line for line in result)
 
 def test_callout_warning():
     lines = ["> [!warning]", "> Be careful here."]
     result = convert_callouts(lines)
-    assert 'type="warning"' in result
+    assert any('type="warning"' in line for line in result)
 
 def test_callout_tip():
     lines = ["> [!tip]", "> Use this shortcut."]
     result = convert_callouts(lines)
-    assert 'type="tip"' in result
+    assert any('type="tip"' in line for line in result)
 
 def test_callout_multiline_content():
     lines = [
@@ -85,7 +85,7 @@ def test_multiple_callouts_in_file():
 def test_callout_type_is_lowercased():
     lines = ["> [!NOTE]", "> Content."]
     result = convert_callouts(lines)
-    assert 'type="note"' in result
+    assert any('type="note"' in line for line in result)
 
 
 # ── Wikilink conversion ───────────────────────────────────────────────────────

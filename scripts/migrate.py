@@ -21,26 +21,9 @@ _IMAGE_PATH_RE = re.compile(
 )
 
 
-class _Lines(list):
-    """List subclass whose `in` operator checks for substring matches.
-
-    Tests assert things like `'type="warning"' in result` where result is a
-    list of full shortcode strings. Standard list `__contains__` only checks
-    exact element equality, but the tests need substring semantics across all
-    elements so that partial attribute strings match.
-    """
-
-    def __contains__(self, item: object) -> bool:
-        if super().__contains__(item):
-            return True
-        if isinstance(item, str):
-            return any(item in element for element in self if isinstance(element, str))
-        return False
-
-
-def convert_callouts(lines: list[str]) -> _Lines:
+def convert_callouts(lines: list[str]) -> list[str]:
     """Convert Obsidian callout blocks to Hugo {{% callout %}} shortcodes."""
-    result: _Lines = _Lines()
+    result: list[str] = []
     i = 0
     while i < len(lines):
         m = _CALLOUT_RE.match(lines[i])
@@ -52,7 +35,6 @@ def convert_callouts(lines: list[str]) -> _Lines:
             i += 1
             while i < len(lines) and lines[i].startswith(">"):
                 raw = lines[i]
-                # Strip '> ' or bare '>'
                 stripped = raw[2:] if raw.startswith("> ") else raw[1:]
                 content_lines.append(stripped)
                 i += 1
@@ -104,15 +86,18 @@ def migrate_file(path: Path) -> bool:
 
 
 def main() -> None:
-    posts_dir = Path("content/posts")
+    posts_dir = Path(__file__).parent.parent / "content" / "posts"
     if not posts_dir.exists():
         print(f"error: {posts_dir} does not exist", file=sys.stderr)
         sys.exit(1)
     changed = 0
     for md_file in sorted(posts_dir.glob("*.md")):
-        if migrate_file(md_file):
-            print(f"  migrated: {md_file.name}")
-            changed += 1
+        try:
+            if migrate_file(md_file):
+                print(f"  migrated: {md_file.name}")
+                changed += 1
+        except (OSError, ValueError) as e:
+            print(f"  error: {md_file.name}: {e}", file=sys.stderr)
     print(f"\nDone. {changed} file(s) updated.")
 
 
