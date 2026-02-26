@@ -142,7 +142,7 @@ there's more to parse after the request line, and given the way the
 a "the rest of the input" return value that contains what has not been
 parsed yet. So a function to parse the request line is:
 
-![parse_request_line](images/parser.rs-20250221-235047.png)
+![parse_request_line](/images/parser.rs-20250221-235047.png)
 
 Breaking this down, lines 2--5 define my `nom`-based parser functions. I
 construct my domain-specific parsers building on the low level `nom`
@@ -230,7 +230,7 @@ RFC](https://www.rfc-editor.org/rfc/rfc2616#section-4.2), but to summarize are
 name/value pairs separated by a `:`. Here is the function I wrote using `nom`
 to parse a single header:
 
-![parse_header](images/http.rs-20250221-235519.png)
+![parse_header](/images/http.rs-20250221-235519.png)
 
 You should be able to grok what's going on here given the earlier
 example. What's new here is the `nom`

@@ -32,10 +32,12 @@ In the previous post I showed how to print the `tree` object. Now we will create
 one, since that is the prerequisite for being able to create the commit object.
 Let’s get to it.
 
-> [!info]
-> I will not be implementing the Git staging area, so there will be “git add”
-> (really git update-index) command required. I will just be creating the `tree`
-> object from the contents of the current directory.
+{{% callout type="info" %}}
+I will not be implementing the Git staging area, so there will be “git add”
+(really git update-index) command required. I will just be creating the `tree`
+object from the contents of the current directory.
+{{% /callout %}}
+
 
 ## Creating a `tree` object
 
@@ -231,10 +233,12 @@ I’ve already implemented. There is no fancy formatting beyond the standard
 header/content split and as I just mentioned, we already have a way to create
 those objects via `hash_object::hash_object()`.
 
-> [!info]
-> One refactoring I will probably do is move this object-writing stuff from
-> hash_object module to object module, since that’s where I have the object
-> reading stuff. But I haven’t done that yet.
+{{% callout type="info" %}}
+One refactoring I will probably do is move this object-writing stuff from
+hash_object module to object module, since that’s where I have the object
+reading stuff. But I haven’t done that yet.
+{{% /callout %}}
+
 
 One thing I did to simplify this implementation for now is to only support three
 command line options.

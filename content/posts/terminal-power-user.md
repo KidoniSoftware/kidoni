@@ -17,9 +17,11 @@ tooth like me and have been using terminal emulators or actual real-life
 terminals for decades, and feel comfortable and at home working within a
 terminal.
 
-> [!note]
-> I will use the term "terminal" from here on out, even though for almost
-> everyone we're really using terminal emulators.
+{{% callout type="note" %}}
+I will use the term "terminal" from here on out, even though for almost
+everyone we're really using terminal emulators.
+{{% /callout %}}
+
 
 But even if you're used to using terminals, you may not have heard of some of
 the newer tools available, which can seriously make you much more productive. So
@@ -46,9 +48,11 @@ So with that out of the way, I've separated the tools into two categories:
 As you'll see some of the tools in the CLI set blur the lines between these two
 categories. I'll calls those out when I describe them.
 
-> [!info]
-> Interestingly, a lot of these tools are written in Rust! Terminal applications
-> are one of the sweet spots for Rust.
+{{% callout type="info" %}}
+Interestingly, a lot of these tools are written in Rust! Terminal applications
+are one of the sweet spots for Rust.
+{{% /callout %}}
+
 
 ## CLIs
 
@@ -213,7 +217,7 @@ $ cat .zshrc
        │ File: .zshrc
 ───────┼────────────────────────────────────────────────────────────────────────
    1   │ # Add deno completions to search path
-   2   │ if [[ ":$FPATH:" != *":$HOME/.zsh/completions:"* ]]; then export FPATH=
+   2   │ if [ ":$FPATH:" != *":$HOME/.zsh/completions:"* ]( ":$FPATH:" != *":$HOME/.zsh/completions:"* ); then export FPATH=
        │ "$HOME/.zsh/completions:$FPATH"; fi
    3   │
    4   │ # If you come from bash you might have to change your $PATH.
@@ -244,20 +248,22 @@ output. It can display a "preview" of the currently selected item in the picker.
 It integrates nicely with your shell, and is often embedded in other tools
 (e.g. nvim).
 
-> [!note]
-> There is a related project [fzf-git](https://github.com/junegunn/fzf-git.sh)
-> that provides shell integration allowing use of fzf with git.
+{{% callout type="note" %}}
+There is a related project [fzf-git](https://github.com/junegunn/fzf-git.sh)
+that provides shell integration allowing use of fzf with git.
+{{% /callout %}}
+
 
 fzf works well integrated with other tools. For example, you can use it with `fd`
 and your shell to have fuzzy command completion. One thing you can do is combine
 it with `ls` (or `eza`) to fuzzy find files or directories, with a preview:
 
-![ls-and-fzf](images/ls-and-fzf.png)
+![ls-and-fzf](/images/ls-and-fzf.png)
 
 Or you can combine it with `ssh` and have it list hosts from your `/etc/hosts`
 file, and showing a preview with `dig`:
 
-![ssh-and-fzf](images/ssh-and-fzf.png)
+![ssh-and-fzf](/images/ssh-and-fzf.png)
 
 Here is my zsh configuration for `fzf` enabling the above functionality:
 
@@ -329,7 +335,7 @@ find what you're looking for, you then have to copy/paste what you found. With
 search for `kubectl` example, and with a shell key mapping to launch `atuin` with
 my up arrow key, I can do `$ kube<up-arrow>` and see:
 
-![autin-and-kube](images/atuin.png)
+![autin-and-kube](/images/atuin.png)
 
 Note that "kube" is shown at the bottom, and if I keep typing, the list will
 narrow down to what I'm looking for. I can then select the command I want, either
@@ -368,7 +374,7 @@ Zoxide depends on `fzf` for the fuzzy search, so you need to have `fzf` installe
 You can see fuzzy matches of your target directory, and then select the one you
 want e.g. `$ z rust<sp><tab>`:
 
-![zoxide](images/zoxide.png)
+![zoxide](/images/zoxide.png)
 
 Shell integration is provided. For my `zsh` configuration I have:
 
@@ -382,7 +388,7 @@ alias cd=z
 The [dust](https://github.com/bootandy/dust) tool can replace `du`. It provides
 a faster and graphical view of disk usage.
 
-![dust](images/dust.png)
+![dust](/images/dust.png)
 
 ### curl replacements
 
@@ -547,19 +553,19 @@ Here are a few. I'm currently using `bpytop` but I've tried them all.
 
 - bpytop
 
-![bpytop](images/bpytop.png)
+![bpytop](/images/bpytop.png)
 
 - btm
 
-![btm](images/btm.png)
+![btm](/images/btm.png)
 
 - gtop
 
-![gtop](images/gtop.png)
+![gtop](/images/gtop.png)
 
 - htop
 
-![htop](images/htop.png)
+![htop](/images/htop.png)
 
 ### lazygit
 
@@ -567,13 +573,13 @@ Here are a few. I'm currently using `bpytop` but I've tried them all.
 pretty full-featured. If you love the terminal and don't want to use a GUI, then
 `lazygit` is really the way to go.
 
-![lazygit](images/lazygit.png)
+![lazygit](/images/lazygit.png)
 
-![lazygit-keybindings](images/lazygit-keybindings.png)
+![lazygit-keybindings](/images/lazygit-keybindings.png)
 
 You can also use `lazygit` from within editors like `neovim`:
 
-![lazygit-in-neovim](images/lazygit-in-neovim.png)
+![lazygit-in-neovim](/images/lazygit-in-neovim.png)
 
 ### dive
 
@@ -584,7 +590,7 @@ see what was added each layer, and more. If you're trying to understand and
 optimize your image, this is a great tool. And while it can be used interactively
 as a TUI, it can also be used headless and integrated into your CI/CD pipeline.
 
-![dive](images/dive.png)
+![dive](/images/dive.png)
 
 ## Conclusion
 

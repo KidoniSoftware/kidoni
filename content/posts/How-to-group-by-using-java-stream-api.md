@@ -101,9 +101,11 @@ By default, the sort is ascending, so we need to implement the `compareTo()`
 logic as shown, providing the 2nd object count (the value of the `Map.Entry`)
 first. If the counts are the same, we sort by the word per the requirements.
 
-> [!note]
-> if we didn't need the descending sort, could have been done with a
-> "comparator chain" comparing the value and `thenComparing` the key:
+{{% callout type="note" %}}
+if we didn't need the descending sort, could have been done with a
+"comparator chain" comparing the value and `thenComparing` the key:
+{{% /callout %}}
+
 
 ```java
 .sorted(

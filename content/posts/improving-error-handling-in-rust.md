@@ -20,9 +20,11 @@ Maybe in future posts I will get into more detail on other topics, but there are
 also good blogs out there already (e.g.
 [this](https://matklad.github.io/2020/10/15/study-of-std-io-error.html)).
 
-> [!info]
-> As a newbie, please feel free in the comments to elaborate on what I
-> might be doing wrong, could do better or is not "canonical" Rust.
+{{% callout type="info" %}}
+As a newbie, please feel free in the comments to elaborate on what I
+might be doing wrong, could do better or is not "canonical" Rust.
+{{% /callout %}}
+
 
 So let's dive in.
 
@@ -147,11 +149,13 @@ As you can see we get both our custom error `could not load configuration` as
 well as a "caused by" with the underlying I/O error from `fs::read_to_string()`.
 This is because `thiserror` generates a `From` implementation.
 
-> [!note]
-> As a bonus aside, there's a cool cargo tool **cargo-expand** that you
-> can install which will dump out the Rust code of a file after all the
-> macros have done their thing. It's like running the C/C++ macro
-> processor, if you're familiar with that.
+{{% callout type="note" %}}
+As a bonus aside, there's a cool cargo tool **cargo-expand** that you
+can install which will dump out the Rust code of a file after all the
+macros have done their thing. It's like running the C/C++ macro
+processor, if you're familiar with that.
+{{% /callout %}}
+
 
 ```text
 $ cargo install cargo-expand
@@ -172,9 +176,9 @@ deeper, and to explore alternative crates such as
 there's a cool create called color-eyre which is simple to use and makes
 backtraces pretty (color, etc.). Check out the before and after:
 
-![not pretty](images/not-pretty.webp)
+![not pretty](/images/not-pretty.webp)
 
-![pretty](images/pretty.webp)
+![pretty](/images/pretty.webp)
 
 To enable this, add the `color-eyre`
 crate and initialize it like so (line 14):

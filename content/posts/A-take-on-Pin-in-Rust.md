@@ -45,4 +45,4 @@ x: 0x7ffe7bac8fa0 x.buf: 0x7ffe7bac8fa0 x.buf_ptr: 0x7ffe7bac91a0 x.buf[512] a
 y: 0x7ffe7bac93b0 y.buf: 0x7ffe7bac93b0 y.buf_ptr: 0x7ffe7bac91a0 y.buf[512] a
 ```
 
-![self-referencing type](images/self-ref-example.png)
+![self-referencing type](/images/self-ref-example.png)

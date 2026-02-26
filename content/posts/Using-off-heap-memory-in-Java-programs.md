@@ -58,7 +58,7 @@ amount of memory available to the OS.
 To create a memory-mapped file in Java, you create a `FileChannel` and invoke
 the `FileChannel.map()` method.
 
-![mapfile](images/offheap-mapfile.png)
+![mapfile](/images/offheap-mapfile.png)
 
 To create the channel you call `FileChannel.open()` as shown, providing the
 location of the file as a `java.nio.file.Path` as a list of `StandardOpenOption`
@@ -69,7 +69,7 @@ ensure the channel gets closed.
 
 Now you can read and write to this file via the `MappedByteBuffer` the file.
 
-![write header](images/offheap-write-header.png)
+![write header](/images/offheap-write-header.png)
 
 I have a `FileHeader` record (been experimenting with the new Java `record`
 support) that contains a type and version. I convert this to a
@@ -82,7 +82,7 @@ offset is increased. You can manipulate the position e.g. if I wanted to
 now read back the header I just wrote, I could call
 `MappedByteBuffer.position(0)` and then call `get()`.
 
-![verify header](images/offheap-verify-header.png)
+![verify header](/images/offheap-verify-header.png)
 
 I hope this has given you a jump start in the use of off-heap memory in
 Java.

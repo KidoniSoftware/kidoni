@@ -79,17 +79,19 @@ ray@kidoni:~$ ls -a
 
 You are now ready to add whatever config you want to manage with chezmoi.
 
-> [!info] An aside on the "architecture" of chezmoi.
-> Chezmoi has a source state and a
-> target state. The source state is the content stored in ~/.local/share/chezmoi
-> while the target state is the content in your filesystem where the "real" files
-> are. The source and target state can be out of sync for various reasons, some
-> good and some not so good. You may legitimately want to have different content
-> as you work on some config changes before you want your changes to take effect.
-> You may also have made changes to the target because you forgot to use the
-> chezmoi `edit` command (see below) and just edited the target file directly.
-> If you do forget to use the `chezmoi edit` command, you can use the
-> `chezmoi re-add` command to update the source state with the target state.
+{{% callout type="info" title="An aside on the "architecture" of chezmoi." %}}
+Chezmoi has a source state and a
+target state. The source state is the content stored in ~/.local/share/chezmoi
+while the target state is the content in your filesystem where the "real" files
+are. The source and target state can be out of sync for various reasons, some
+good and some not so good. You may legitimately want to have different content
+as you work on some config changes before you want your changes to take effect.
+You may also have made changes to the target because you forgot to use the
+chezmoi `edit` command (see below) and just edited the target file directly.
+If you do forget to use the `chezmoi edit` command, you can use the
+`chezmoi re-add` command to update the source state with the target state.
+{{% /callout %}}
+
 
 ### Adding configuration
 
@@ -154,11 +156,13 @@ ray@kidoni:~$ git remote add origin https://github.com/<youruser>/dotfiles.git
 ray@kidoni:~$ git push -u origin main
 ```
 
-> [!note] Correction
-> In the original version of this post I said that there was a builtin chezmoi
-> command 'push' (e.g. `chezmoi push`) to push git changes to your remote. This
-> was incorrect. I had an alias for that: `alias cpush='chezmoi git push'` which
-> made me think there was a `chezmoi push`.
+{{% callout type="note" title="Correction" %}}
+In the original version of this post I said that there was a builtin chezmoi
+command 'push' (e.g. `chezmoi push`) to push git changes to your remote. This
+was incorrect. I had an alias for that: `alias cpush='chezmoi git push'` which
+made me think there was a `chezmoi push`.
+{{% /callout %}}
+
 
 You do not need to be in the chezmoi directory to use Git commands. You can use
 `chezmoi git` to execute git commands as if you were in the chezmoi directory:

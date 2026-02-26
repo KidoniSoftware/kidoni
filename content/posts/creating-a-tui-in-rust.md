@@ -28,10 +28,12 @@ terminal interaction. Several are supported, but the one I chose (and the most
 common?) is called [Crossterm](https://github.com/crossterm-rs/crossterm). I am
 going to focus here more on Ratatui then Crossterm, except as needed.
 
-> [!note]
-> Please note --- in this blog I may use "terminal" and "console"
-> interchangeably. For someone who's been around a bit like me, a
-> console is a terminal, not something you play video games on. :)
+{{% callout type="note" %}}
+Please note --- in this blog I may use "terminal" and "console"
+interchangeably. For someone who's been around a bit like me, a
+console is a terminal, not something you play video games on. :)
+{{% /callout %}}
+
 
 To showcase Ratatui (and Crossterm) I am going to create a simple text
 file "viewer" --- a TUI to display a text file and scroll around. The
@@ -44,7 +46,7 @@ it).
 
 Here is a screenshot of the finished TUI ---
 
-![finished tui](images/tui-finished.webp)
+![finished tui](/images/tui-finished.webp)
 
 The file name is displayed in the top left. There is a scroll bar on the
 right. And there is a footer with some keyboard commands in the bottom
@@ -91,7 +93,7 @@ using `tokio`.
 
 As such, the structure of our example application is
 
-![tui structure](images/tui-structure.webp)
+![tui structure](/images/tui-structure.webp)
 
 ## Understanding Terminal Interaction
 
@@ -131,10 +133,12 @@ up). In `tui.rs` we have a `struct Tui` that exposes an API with methods like
 It also exposes terminal events like an Iterator by providing a `next()` method
 (more on that later).
 
-> [!info]
-> As I mentioned earlier, this Tui struct is taken from the Ratatui
-> documentation
-> [here](https://ratatui.rs/how-to/develop-apps/terminal-and-event-handler/).
+{{% callout type="info" %}}
+As I mentioned earlier, this Tui struct is taken from the Ratatui
+documentation
+[here](https://ratatui.rs/how-to/develop-apps/terminal-and-event-handler/).
+{{% /callout %}}
+
 
 To switch into the raw mode, the Tui struct exposes the `enter()` method,
 wrapping Crossterm functions:
@@ -179,7 +183,7 @@ the layout(s) you set up various "blocks" to hold components like "paragraph" or
 "text" and various properties like margins and padding and text styles (color,
 font, etc). Here is a sketch of the UI layout
 
-![tui layout](images/tui-layout.webp)
+![tui layout](/images/tui-layout.webp)
 
 Setting up the Ratatui UI as shown in the sketch can be seen in the `ui()`
 method in `src/main.rs`:
@@ -324,7 +328,7 @@ called.) So what's going on here?
   sent by the terminal event processing thread, which itself gets events from
   Crossterm.
 
-![tui event handling](images/tui-event-handling.webp)
+![tui event handling](/images/tui-event-handling.webp)
 
 - lines 8--11: when we have a `tui::Event` we call `handle_event()` to turn the
   `tui::Event` into our own file viewing app event type, discarding any events we

@@ -14,8 +14,10 @@ tags:
 draft: false
 ---
 
-> [!note] Written with AI
-> This post — and all the code behind it — was built with [Claude Code](https://claude.ai/claude-code). Read [Part 0](vibe-lox-pt0-preamble) for the full story of how this AI-assisted project came together.
+{{% callout type="note" title="Written with AI" %}}
+This post — and all the code behind it — was built with [Claude Code](https://claude.ai/claude-code). Read [Part 0](vibe-lox-pt0-preamble) for the full story of how this AI-assisted project came together.
+{{% /callout %}}
+
 
 Previously in this series: [Part 1 — Introduction](vibe-lox-pt1-introduction), [Part 2 — Tokenization](vibe-lox-pt2-tokenization), [Part 3 — Parsing](vibe-lox-pt3-parsing), [Part 4 — The Tree-Walk Interpreter](vibe-lox-pt4-interpreter), [Part 5 — The Bytecode VM](vibe-lox-pt5-vm), and [Part 6 — LLVM Compilation](vibe-lox-pt6-llvm). This is the final post in the series.
 

@@ -14,8 +14,10 @@ tags:
 draft: false
 ---
 
-> [!note] Written with AI
-> This post — and all the code behind it — was built with [Claude Code](https://claude.ai/claude-code). Read [Part 0](vibe-lox-pt0-preamble) for the full story of how this AI-assisted project came together.
+{{% callout type="note" title="Written with AI" %}}
+This post — and all the code behind it — was built with [Claude Code](https://claude.ai/claude-code). Read [Part 0](vibe-lox-pt0-preamble) for the full story of how this AI-assisted project came together.
+{{% /callout %}}
+
 
 In [Part 1](vibe-lox-pt1-introduction) we introduced the Lox language and took a high-level tour of the full compiler pipeline — from raw source text all the way to native code. Now it's time to go deep on the first phase of that pipeline: tokenization. This is where a plain string of characters becomes something a parser can actually reason about.
 

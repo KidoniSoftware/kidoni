@@ -41,7 +41,7 @@ around comes around.
 With protobuf you create a `.proto` file where you define "message" formats. For
 this example we'll define a `Person` with some attributes including an `Address`.
 
-![person.proto](images/person.proto-20250225-002701.png)
+![person.proto](/images/person.proto-20250225-002701.png)
 
 Some things to note in this definition are
 
@@ -74,15 +74,15 @@ installed wherever your build is executing.
 
 First, add the plugin:
 
-![build.gradle plugins](images/build.gradle-20250225-002956.png)
+![build.gradle plugins](/images/build.gradle-20250225-002956.png)
 
 Then add the protobuf library dependency:
 
-![build.gradle plugins](images/build.gradle-20250225-003155.png)
+![build.gradle plugins](/images/build.gradle-20250225-003155.png)
 
 Finally, configure the plugin to download `protoc` if you want that:
 
-![build.gradle plugins](images/build.gradle-20250225-003334.png)
+![build.gradle plugins](/images/build.gradle-20250225-003334.png)
 
 By default the plugin expects your `.proto` files to be in `src/main/proto` but
 you can configure that as well as several other things (e.g. the location for
@@ -91,7 +91,7 @@ the generated sources). See the plugin documentation in the link provided.
 Now how do you use the generated code? Protobuf uses a "builder" pattern
 for constructing instances.
 
-![LogDbFileTest.java](images/LogDbFileTest.java-20250225-003537.png)
+![LogDbFileTest.java](/images/LogDbFileTest.java-20250225-003537.png)
 
 There are a few different methods that can then be used to serialize the
 `Person` instance e.g.
@@ -105,7 +105,7 @@ and a few others. As I integrated this with my `LogDbFile` example, I used the
 `writeTo(OutputStream)` method, after enhancing my `LogDbFile` class to expose
 an `OutputStream` (and an `InputStream`).
 
-![LogDbFileTest.java](images/LogDbFileTest.java-20250225-003838.png)
+![LogDbFileTest.java](/images/LogDbFileTest.java-20250225-003838.png)
 
 Since the idea with this `LogDb` is to simulate an append-only file, you can
 either write (to the end) or read, so in this example I create a new file -

@@ -96,9 +96,11 @@ values, you use a path-like syntax, similar to what you might use with `jq`.
 {{ .chezmoi.hostname }} {{ .chezmoi.os }}
 ```
 
-> [!tip]
-> A quick and easy way to test your template expressions with with the
-> `chezmoi execute-template` command.
+{{% callout type="tip" %}}
+A quick and easy way to test your template expressions with with the
+`chezmoi execute-template` command.
+{{% /callout %}}
+
 
 ```sh
 $ chezmoi execute-template "host: {{ .chezmoi.hostname }} os: {{ .chezmoi.os }}"
@@ -151,8 +153,10 @@ chezmoi chattr +template ~/.gitconfig
 chezmoi edit ~/.gitconfig
 ```
 
-> [!note]
-> Obviously leave off the `chattr` if you've already made the file into a template
+{{% callout type="note" %}}
+Obviously leave off the `chattr` if you've already made the file into a template
+{{% /callout %}}
+
 
 In the `.gitconfig` edit the `[user]` section:
 

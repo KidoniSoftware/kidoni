@@ -89,11 +89,13 @@ you'd have
 
 So let's see how we would do that in Java.
 
-> [!note]
-> As I mentioned, the `Gatherer` interface is still preview in JDK 23. To use it
-> you will need to pass `--enable-preview` to the JVM when you run these
-> examples. Or pass the flag via your build tool, like Gradle or Maven. I will
-> show how to do it with Gradle.
+{{% callout type="note" %}}
+As I mentioned, the `Gatherer` interface is still preview in JDK 23. To use it
+you will need to pass `--enable-preview` to the JVM when you run these
+examples. Or pass the flag via your build tool, like Gradle or Maven. I will
+show how to do it with Gradle.
+{{% /callout %}}
+
 
 ### Constructing a Gatherer
 
@@ -116,11 +118,13 @@ gatherer. The state is the intermediate "slices" while we wait for the predicate
 to match. I collect these gatherers into a single static utility class I've
 ingeniously named `Gatherers`.
 
-> [!note]
-> For decades now I've adopted a pattern I first saw in `Spring Framework` code,
-> to have static utility classes be `public abstract` classes. This avoids some
-> "boilerplate" where you would otherwise need to create a private constructor
-> so that class can't be instantiated.
+{{% callout type="note" %}}
+For decades now I've adopted a pattern I first saw in `Spring Framework` code,
+to have static utility classes be `public abstract` classes. This avoids some
+"boilerplate" where you would otherwise need to create a private constructor
+so that class can't be instantiated.
+{{% /callout %}}
+
 
 In the `Gatherers` class I have static methods to create our splitters.
 

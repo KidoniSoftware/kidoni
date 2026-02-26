@@ -101,7 +101,7 @@ return {
 ```
 
 or, using the plugin itself to take a screenshot of the contents ...
-![nvim-silicon](images/nvim-silicon.lua-20250215-204607.png)
+![nvim-silicon](/images/nvim-silicon.lua-20250215-204607.png)
 
 Which looks better?
 

@@ -22,7 +22,7 @@ The `ls-tree` command is similar to doing an `ls` in a terminal emulator. It
 lists the contents of `tree` objects in Git. The Git object model looks like
 this (copied from Part 2)
 
-![git object tree](images/git-object-tree.png)
+![git object tree](/images/git-object-tree.png)
 
 A `commit` object contains (among other things) a "pointer" to a `tree` object
 in the form of a SHA-1 hash (\`01a2\` in the diagram). The `tree` object
@@ -63,7 +63,7 @@ Cargo.toml in the example above) and the file name in the first part, and after
 the null byte the 20 byte SHA-1 hash. This is the raw bytes, not ASCII-encoded
 (otherwise it would be 40 bytes, right). So a `tree` object looks something like
 
-![raw tree object](images/raw-tree-object.png)
+![raw tree object](/images/raw-tree-object.png)
 
 The `ls-tree` command also allows printing the size of the file with the
 `-l/--long` option e.g.
@@ -546,7 +546,7 @@ fn create_file_name(path: &Option<String>, filename: String) -> String {
 
 Recall our diagram from earlier (slightly enhanced).
 
-![enhanced raw tree object](images/enhanced-raw-tree-obj.png)
+![enhanced raw tree object](/images/enhanced-raw-tree-obj.png)
 
 The `print_tree_object()` method loops over the body, advancing a "pointer" (the
 `body` variable) to the remaining data as we work through the entries. First we

@@ -48,7 +48,7 @@ As an example, let's say our initial commit of a new Rust project had a
 `Cargo.toml` file and `src/main.rs` and `src/lib.rs` files. You might end up
 with an object graph like
 
-![git object tree](images/git-object-tree.png)
+![git object tree](/images/git-object-tree.png)
 
 Note that in and of themselves, blob objects don't know anything about
 themselves --- a complete lack of self-awareness as it were. The fact that blob
@@ -82,8 +82,10 @@ struct HashObjectArgs {
 
 ```
 
-> [!note]
-> I'm not showing all the command arguments available to `git hash-object`.
+{{% callout type="note" %}}
+I'm not showing all the command arguments available to `git hash-object`.
+{{% /callout %}}
+
 
 Everything in `struct HashObjectArgs` should be familiar from my first post,
 except for the `file` field at the end, lines 11--12. Many Git commands have a

@@ -16,10 +16,12 @@ previous posts, you can find them here
 - [Part 1](learning-git-pt1) — git init
 - [Part 2](learning-git-pt2) — git hash-object
 
-> [!info]
-> At the end of Part 2 I said the next blog would be on `cat-file`. Sorry for
-> the bait and switch, but I wanted to do this refactoring, so I snuck this in.
-> We'll definitely get to `cat-file` next time.
+{{% callout type="info" %}}
+At the end of Part 2 I said the next blog would be on `cat-file`. Sorry for
+the bait and switch, but I wanted to do this refactoring, so I snuck this in.
+We'll definitely get to `cat-file` next time.
+{{% /callout %}}
+
 
 While this post is mostly standalone, there are aspects of the prior posts that
 will probably help to understand this post better.
@@ -31,11 +33,11 @@ single `main.rs` file and refactor it into several files. I will create a
 within `commands`. I will also separate out utility functions into a `util`
 module.
 
-![code refactor](images/learning-git-code-refactor.png)
+![code refactor](/images/learning-git-code-refactor.png)
 
 The directory structure becomes
 
-![refactored code directory tree](images/learning-git-pt3-dir-tree.png)
+![refactored code directory tree](/images/learning-git-pt3-dir-tree.png)
 
 The `main()` method becomes extremely
 basic (`use` statements elided).

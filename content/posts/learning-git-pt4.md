@@ -101,11 +101,13 @@ pub(crate) fn cat_file_command(args: CatFileArgs) -> GitCommandResult {
 ...
 ```
 
-> [!info]
-> At some point I will probably refactor these command entry points such that
-> there is a trait for a command, to make it explicit that each handler should
-> take `args` and return a `GitCommandResult` but it's not worth it at this
-> point.
+{{% callout type="info" %}}
+At some point I will probably refactor these command entry points such that
+there is a trait for a command, to make it explicit that each handler should
+take `args` and return a `GitCommandResult` but it's not worth it at this
+point.
+{{% /callout %}}
+
 
 I also went through and pretty much everywhere replaced `io::Result` with
 `GitResult`.

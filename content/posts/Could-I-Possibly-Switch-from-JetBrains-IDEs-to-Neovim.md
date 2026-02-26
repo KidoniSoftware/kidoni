@@ -132,9 +132,9 @@ Well, at least with Neovim, maybe I was wrong!
 
 Take a look at these screenshots of my Neovim as I edit a Rust file
 
-![code editing with doc pupup](images/nvim-doc-popup.png)
+![code editing with doc pupup](/images/nvim-doc-popup.png)
 
-![interactive debug session](images/nvim-dap-view.png)
+![interactive debug session](/images/nvim-dap-view.png)
 
 The first screenshot is an editing session, with the file in the "main" middle
 part of the window, a directory tree on the left and a symbol explorer tree on
@@ -175,7 +175,7 @@ or `<leader>do`).
 There's also a pretty comprehensive Git integration, for example with
 [LazyGit](https://github.com/jesseduffield/lazygit):
 
-![Git integration in Neovim with LazyGit](images/nvim-lazygit.png)
+![Git integration in Neovim with LazyGit](/images/nvim-lazygit.png)
 
 You can do pretty much anything here. Bringing up this view is `<leader>gg` or I
 could look at just the commits that were done `<leader>gc` or just the Git log
@@ -203,7 +203,7 @@ and [`fzf`](https://github.com/junegunn/fzf)) and improved search i.e. grep (by
 integrating [`rg`](https://github.com/BurntSushi/ripgrep)) including previewing
 the file contents:
 
-![searching for files with fuzzy search and content previewing](images/nvim-fuzzy-find.png)
+![searching for files with fuzzy search and content previewing](/images/nvim-fuzzy-find.png)
 
 ### What About Refactoring?
 
@@ -227,14 +227,14 @@ follows the pattern for 'extract constant' with a `v` instead of a `c` as you'd
 expect --- `<leader>cxv`. With Rust I got to it via a 'source action' popup menu
 ...
 
-![extract variable refactoring in Rust](images/nvim-extract-var.png)
+![extract variable refactoring in Rust](/images/nvim-extract-var.png)
 
 In the above, I had my cursor on a integer literal `65` and via `<leader>ca` I
 got this popup which provided some options of what to do with `65`.
 
 I can do some code generation with Java but not Rust ...
 
-![Java code generation](images/nvim-code-actions.png)
+![Java code generation](/images/nvim-code-actions.png)
 
 though the actions for Java are different for 'code actions' vs 'source actions'
 even though the popup dialog has the same title for a 'source action' above
@@ -242,7 +242,7 @@ even though the popup dialog has the same title for a 'source action' above
 strangely (e.g. the last option in both, "Change modifiers to final where
 possible" ... a refactoring I approve of!).
 
-![additional code generation](images/nvim-codegen.png)
+![additional code generation](/images/nvim-codegen.png)
 
 ## What's the Verdict?
 
@@ -271,7 +271,7 @@ any other IDE makes me feel good. And with themes and [(nerd) fonts](https://www
 and other such things (e.g. status line plugins) you can make it look as good as
 a GUI.
 
-![nvim status line](images/nvim-status-line.png)
+![nvim status line](/images/nvim-status-line.png)
 
 What I need to do is spend some time adjusting the key bindings because some of
 them are too verbose for me. For example, with debugging in IntelliJ and

@@ -12,12 +12,14 @@ tags:
 draft: false
 ---
 
-> [!info]
-> This is the first post where I'm doing "quick bytes" of simple examples with
-> Rust. This is both a way for me to keep track of some basic usage of various
-> Rust-isms, but also a way for me to share that in case it's helpful. I could
-> just leave these as notes in my [Obsidian](https://obsidian.md/) vault, but
-> why not share!
+{{% callout type="info" %}}
+This is the first post where I'm doing "quick bytes" of simple examples with
+Rust. This is both a way for me to keep track of some basic usage of various
+Rust-isms, but also a way for me to share that in case it's helpful. I could
+just leave these as notes in my [Obsidian](https://obsidian.md/) vault, but
+why not share!
+{{% /callout %}}
+
 
 ## UDP
 

@@ -160,7 +160,7 @@ but some things that continue to trip up my muscle memory are:
 > menu-like information about available keybindings. But Helix also provides
 > available commands and some help text for the selected command.
 
-![helix-command-completion](images/helix-command-help.png)
+![helix-command-completion](/images/helix-command-help.png)
 
 ## Action/Selection vs Selection/Action
 
@@ -210,12 +210,14 @@ just one cursor.
 
 To "collapse" the multiple cursors back to just one cursor, use the `,` command.
 
-> [!warning]
-> Make sure you exit this multi-cursor mode with `,`. It can bite you otherwise
-> since the other cursors may not all be visible in your current buffer view.
-> If you forget and start editing at where you think the cursor is at, you
-> could be editing other places at the same time! This applies as much to the
-> multi-selection stuff below.
+{{% callout type="warning" %}}
+Make sure you exit this multi-cursor mode with `,`. It can bite you otherwise
+since the other cursors may not all be visible in your current buffer view.
+If you forget and start editing at where you think the cursor is at, you
+could be editing other places at the same time! This applies as much to the
+multi-selection stuff below.
+{{% /callout %}}
+
 
 You can use counts with the `C` command as you would other selection actions.
 So `4C` would create 4 cursors - _in addition to the current cursor_ - for
@@ -295,9 +297,11 @@ and do `4Cw&`.
 > If anyone know how to do this "easily" in NeoVim, please let me know in the
 > comments. I'm always looking to improve my NeoVim-fu!
 
-> [!note]
-> It seems you can only align to the right. I can't figure out how to "left
-> align". If you know how, let me know!
+{{% callout type="note" %}}
+It seems you can only align to the right. I can't figure out how to "left
+align". If you know how, let me know!
+{{% /callout %}}
+
 
 ## Writing & Testing Code
 
@@ -312,7 +316,7 @@ fuzzy finder picker for all symbols in the workspace. The NeoVim equivalent
 NeoVim has more of a tree structure with icons to indicate symbol type and also
 text color coding, while Helix has plain text e.g 'module', 'method':
 
-![code symbols](images/hx-vs-nvim-code-symbols.png)
+![code symbols](/images/hx-vs-nvim-code-symbols.png)
 
 Even so, as a full IDE Helix still has some way to go:
 
@@ -420,7 +424,7 @@ M = ':lsp-workspace-command open-preview'
 
 ```toml
 # language.toml
-[[language]]
+[language](language)
 name = "markdown"
 language-servers = ["marksman", "mpls"]
 
