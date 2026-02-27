@@ -758,7 +758,7 @@ name: Deploy Hugo to GitHub Pages
 
 on:
   push:
-    branches: [v4]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -925,11 +925,11 @@ git commit -m "chore: remove Quartz infrastructure (source, config, node files)"
 git push -u origin hugo-migration
 ```
 
-**Step 2: Open a PR from `hugo-migration` → `v4`**
+**Step 2: Open a PR from `hugo-migration` → `main`**
 
 ```bash
 gh pr create \
-  --base v4 \
+  --base main \
   --title "feat: migrate from Quartz to Hugo + PaperMod" \
   --body "Replaces Quartz v4 with Hugo + PaperMod theme.
 
@@ -940,7 +940,7 @@ gh pr create \
 - Static assets moved to \`static/\`
 - Giscus comments preserved (same repo/category IDs)
 - GitHub Actions deploy workflow replaces Quartz sync
-- Quartz upstream remote removed
+- Quartz upstream remote removed, branch renamed v4 → main
 - All Quartz source files, Node.js toolchain removed
 
 ## Verify before merging
