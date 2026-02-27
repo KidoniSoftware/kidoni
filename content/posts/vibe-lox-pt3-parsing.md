@@ -14,9 +14,9 @@ tags:
 draft: false
 ---
 
-{{% callout type="note" title="Written with AI" %}}
+{{< callout type="note" title="Written with AI" >}}
 This post — and all the code behind it — was built with [Claude Code](https://claude.ai/claude-code). Read [Part 0](vibe-lox-pt0-preamble) for the full story of how this AI-assisted project came together.
-{{% /callout %}}
+{{< /callout >}}
 
 
 Previously in this series, [Part 1](vibe-lox-pt1-introduction) introduced the overall pipeline — scanner, parser, AST, and the multiple backends (tree-walk interpreter, bytecode VM, and LLVM codegen) — and [Part 2](vibe-lox-pt2-tokenization) covered tokenization: how winnow turns raw source text into a flat stream of typed tokens. Now we have that token stream in hand. The parser's job is to take that flat sequence and build a *tree* that captures the actual structure and meaning of the program.

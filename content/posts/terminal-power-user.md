@@ -17,10 +17,10 @@ tooth like me and have been using terminal emulators or actual real-life
 terminals for decades, and feel comfortable and at home working within a
 terminal.
 
-{{% callout type="note" %}}
+{{< callout type="note" >}}
 I will use the term "terminal" from here on out, even though for almost
 everyone we're really using terminal emulators.
-{{% /callout %}}
+{{< /callout >}}
 
 
 But even if you're used to using terminals, you may not have heard of some of
@@ -48,10 +48,10 @@ So with that out of the way, I've separated the tools into two categories:
 As you'll see some of the tools in the CLI set blur the lines between these two
 categories. I'll calls those out when I describe them.
 
-{{% callout type="info" %}}
+{{< callout type="info" >}}
 Interestingly, a lot of these tools are written in Rust! Terminal applications
 are one of the sweet spots for Rust.
-{{% /callout %}}
+{{< /callout >}}
 
 
 ## CLIs
@@ -248,10 +248,10 @@ output. It can display a "preview" of the currently selected item in the picker.
 It integrates nicely with your shell, and is often embedded in other tools
 (e.g. nvim).
 
-{{% callout type="note" %}}
+{{< callout type="note" >}}
 There is a related project [fzf-git](https://github.com/junegunn/fzf-git.sh)
 that provides shell integration allowing use of fzf with git.
-{{% /callout %}}
+{{< /callout >}}
 
 
 fzf works well integrated with other tools. For example, you can use it with `fd`

@@ -82,9 +82,9 @@ struct HashObjectArgs {
 
 ```
 
-{{% callout type="note" %}}
+{{< callout type="note" >}}
 I'm not showing all the command arguments available to `git hash-object`.
-{{% /callout %}}
+{{< /callout >}}
 
 
 Everything in `struct HashObjectArgs` should be familiar from my first post,

@@ -96,10 +96,10 @@ values, you use a path-like syntax, similar to what you might use with `jq`.
 {{ .chezmoi.hostname }} {{ .chezmoi.os }}
 ```
 
-{{% callout type="tip" %}}
+{{< callout type="tip" >}}
 A quick and easy way to test your template expressions with with the
 `chezmoi execute-template` command.
-{{% /callout %}}
+{{< /callout >}}
 
 
 ```sh
@@ -153,9 +153,9 @@ chezmoi chattr +template ~/.gitconfig
 chezmoi edit ~/.gitconfig
 ```
 
-{{% callout type="note" %}}
+{{< callout type="note" >}}
 Obviously leave off the `chattr` if you've already made the file into a template
-{{% /callout %}}
+{{< /callout >}}
 
 
 In the `.gitconfig` edit the `[user]` section:

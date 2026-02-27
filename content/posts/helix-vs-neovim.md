@@ -210,13 +210,13 @@ just one cursor.
 
 To "collapse" the multiple cursors back to just one cursor, use the `,` command.
 
-{{% callout type="warning" %}}
+{{< callout type="warning" >}}
 Make sure you exit this multi-cursor mode with `,`. It can bite you otherwise
 since the other cursors may not all be visible in your current buffer view.
 If you forget and start editing at where you think the cursor is at, you
 could be editing other places at the same time! This applies as much to the
 multi-selection stuff below.
-{{% /callout %}}
+{{< /callout >}}
 
 
 You can use counts with the `C` command as you would other selection actions.
@@ -297,10 +297,10 @@ and do `4Cw&`.
 > If anyone know how to do this "easily" in NeoVim, please let me know in the
 > comments. I'm always looking to improve my NeoVim-fu!
 
-{{% callout type="note" %}}
+{{< callout type="note" >}}
 It seems you can only align to the right. I can't figure out how to "left
 align". If you know how, let me know!
-{{% /callout %}}
+{{< /callout >}}
 
 
 ## Writing & Testing Code
@@ -489,7 +489,7 @@ distros like LazyVim and its brethren.
 For me personally, I will keep my eye on Helix, but I'm not switching from NeoVim
 (or IntelliJ or RustRover). Maybe I'll try my hand at contributing to Helix.
 
-{{% callout type="question" %}}
+{{< callout type="question" >}}
 What do you think of Helix? I'd love to hear your experiences! Leave them in
 the comments.
-{{% /callout %}}
+{{< /callout >}}

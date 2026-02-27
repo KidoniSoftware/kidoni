@@ -22,8 +22,8 @@ briefly show how to use `CodeSnap` and discuss how it compares to Silicon.
 
 ## CodeSnap
 
-{{% callout type="note" title="I cover only `CodeSnap` v1.0 here." %}}
-{{% /callout %}}
+{{< callout type="note" title="I cover only `CodeSnap` v1.0 here." >}}
+{{< /callout >}}
 
 
 ### Install
@@ -111,7 +111,7 @@ Finally the `CodeSnapASCII` is pretty unique I think, and captures an ASCII vers
 of a screenshot to the clipboard, with for example a border using ASCII characters
 like to save to a text file.
 
-{{% callout type="warning" %}}
+{{< callout type="warning" >}}
 Interestingly, when I used `CodeSnapASCII`, saved the resulting text to a
 file and then tried to get a screenshot of that text, `CodeSnap` paniced! Perhaps
 some ASCII character used to draw the border caused an issue? I don't know,
@@ -119,7 +119,7 @@ and as of this writing I haven't submitted a bug or looked into it further. I
 wanted to show what the resulting captured ASCII looked like, but I guess this
 will be an exercise for the reader. Maybe it will be fixed when you read this
 and try it. Or it might be platform-specific (I'm on Ubuntu).
-{{% /callout %}}
+{{< /callout >}}
 
 
 Both the clipboard and save-to-file commands work fine. One thing the docs note

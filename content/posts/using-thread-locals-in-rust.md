@@ -19,12 +19,12 @@ they focus on specific "challenges" with specific tasks to accomplish for each
 challenge. I've worked through a few of them, and I used threads and thread
 locals on the HTTP server challenge.
 
-{{% callout type="note" %}}
+{{< callout type="note" >}}
 I am not affiliated with CodeCrafters in any way. I just found it interesting
 and since I developed the code I use in this example from working on one of
 their challenges, I thought I'd give some acknowledgement. I don't get any
 kind of "kickback" for mentioning them.
-{{% /callout %}}
+{{< /callout >}}
 
 
 As the task was to build a basic HTTP server, I decided to use the `tokio` crate.
@@ -115,13 +115,13 @@ argument to the `tokio::main` macro ...
 async fn main() -> io::Result<()> {
 ```
 
-{{% callout type="note" %}}
+{{< callout type="note" >}}
 You need to have the macros, rt and rt-multi-thread features enabled, at a
 minimum, for tokio::main, task_local! and flavor = "multi_thread" to work.
 Some other features are required as well to get the net and io stuff e.g.
 
 `tokio = { version = “1.38.0”, features = [“macros”, “rt-multi-thread”, “rt”, “net”, “io-util”, “fs”] }`
-{{% /callout %}}
+{{< /callout >}}
 
 
 To contain the current and future "context" I wanted to provide to

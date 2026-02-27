@@ -12,13 +12,13 @@ tags:
 draft: false
 ---
 
-{{% callout type="info" %}}
+{{< callout type="info" >}}
 This is the first post where I'm doing "quick bytes" of simple examples with
 Rust. This is both a way for me to keep track of some basic usage of various
 Rust-isms, but also a way for me to share that in case it's helpful. I could
 just leave these as notes in my [Obsidian](https://obsidian.md/) vault, but
 why not share!
-{{% /callout %}}
+{{< /callout >}}
 
 
 ## UDP
@@ -50,11 +50,11 @@ pretty self-explanatory ... use `recv_from(&mut buf)` to read data and use
 because it reads from the port it's bound to. However, sending data requires the
 address where to send, since that can obviously be anywhere.
 
-{{% callout type="important" %}}
+{{< callout type="important" >}}
 For the simple example I just return errors from the `main()` method and use
 the `?` shortcut to return errors. Naturally in a "real" program you would use
 error handling best practices.
-{{% /callout %}}
+{{< /callout >}}
 
 
 ```rust

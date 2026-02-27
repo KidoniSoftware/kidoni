@@ -3,7 +3,7 @@
 Quartz → Hugo + PaperMod content migration.
 
 Transforms markdown files in-place:
-  - Obsidian/Quartz callout blocks → Hugo {{% callout %}} shortcodes
+  - Obsidian/Quartz callout blocks → Hugo {{< callout >}} shortcodes
   - [[wikilinks]] → standard [text](url) markdown links
   - content/images/ paths → /images/ (after assets move to static/)
 """
@@ -22,7 +22,7 @@ _IMAGE_PATH_RE = re.compile(
 
 
 def convert_callouts(lines: list[str]) -> list[str]:
-    """Convert Obsidian callout blocks to Hugo {{% callout %}} shortcodes."""
+    """Convert Obsidian callout blocks to Hugo {{< callout >}} shortcodes."""
     result: list[str] = []
     i = 0
     while i < len(lines):
@@ -40,11 +40,11 @@ def convert_callouts(lines: list[str]) -> list[str]:
                 i += 1
             # Emit shortcode
             if title:
-                result.append(f'{{{{% callout type="{callout_type}" title="{title}" %}}}}')
+                result.append(f'{{{{< callout type="{callout_type}" title="{title}" >}}}}')
             else:
-                result.append(f'{{{{% callout type="{callout_type}" %}}}}')
+                result.append(f'{{{{< callout type="{callout_type}" >}}}}')
             result.extend(content_lines)
-            result.append("{{% /callout %}}")
+            result.append("{{< /callout >}}")
             result.append("")
         else:
             result.append(lines[i])

@@ -14,9 +14,9 @@ tags:
 draft: false
 ---
 
-{{% callout type="note" title="Written with AI" %}}
+{{< callout type="note" title="Written with AI" >}}
 This post — and all the code behind it — was built with [Claude Code](https://claude.ai/claude-code). Read [Part 0](vibe-lox-pt0-preamble) for the full story of how this AI-assisted project came together.
-{{% /callout %}}
+{{< /callout >}}
 
 
 This is part 5 of a series on building a Lox compiler in Rust. Parts 1 through 4 covered the

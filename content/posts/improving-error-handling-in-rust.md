@@ -20,10 +20,10 @@ Maybe in future posts I will get into more detail on other topics, but there are
 also good blogs out there already (e.g.
 [this](https://matklad.github.io/2020/10/15/study-of-std-io-error.html)).
 
-{{% callout type="info" %}}
+{{< callout type="info" >}}
 As a newbie, please feel free in the comments to elaborate on what I
 might be doing wrong, could do better or is not "canonical" Rust.
-{{% /callout %}}
+{{< /callout >}}
 
 
 So let's dive in.
@@ -149,12 +149,12 @@ As you can see we get both our custom error `could not load configuration` as
 well as a "caused by" with the underlying I/O error from `fs::read_to_string()`.
 This is because `thiserror` generates a `From` implementation.
 
-{{% callout type="note" %}}
+{{< callout type="note" >}}
 As a bonus aside, there's a cool cargo tool **cargo-expand** that you
 can install which will dump out the Rust code of a file after all the
 macros have done their thing. It's like running the C/C++ macro
 processor, if you're familiar with that.
-{{% /callout %}}
+{{< /callout >}}
 
 
 ```text

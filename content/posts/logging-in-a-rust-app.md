@@ -15,10 +15,10 @@ This blog post is part of a series I'm developing documenting my
 evolution as a Rust developer. Currently I'm a newbie, but I'm making
 progress.
 
-{{% callout type="note" %}}
+{{< callout type="note" >}}
 As a newbie, please feel free in the comments to elaborate on what I
 might be doing wrong, could do better or is not "canonical" Rust.
-{{% /callout %}}
+{{< /callout >}}
 
 
 Logging is obviously a key aspect of a production-ready application.

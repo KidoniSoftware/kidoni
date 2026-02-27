@@ -288,9 +288,9 @@ to have Clap parse the command line you call the `parse()` method on the struct
 that was annotated with `Parse`. If there are any issues parsing or validating
 the config, `parse()` will exit and print help text.
 
-{{% callout type="info" %}}
+{{< callout type="info" >}}
 A `help` command is automatically created by Clap.
-{{% /callout %}}
+{{< /callout >}}
 
 
 Otherwise you get back the struct Clap parsed. Then it's simple enough to just

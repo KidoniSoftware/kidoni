@@ -28,11 +28,11 @@ terminal interaction. Several are supported, but the one I chose (and the most
 common?) is called [Crossterm](https://github.com/crossterm-rs/crossterm). I am
 going to focus here more on Ratatui then Crossterm, except as needed.
 
-{{% callout type="note" %}}
+{{< callout type="note" >}}
 Please note --- in this blog I may use "terminal" and "console"
 interchangeably. For someone who's been around a bit like me, a
 console is a terminal, not something you play video games on. :)
-{{% /callout %}}
+{{< /callout >}}
 
 
 To showcase Ratatui (and Crossterm) I am going to create a simple text
@@ -133,11 +133,11 @@ up). In `tui.rs` we have a `struct Tui` that exposes an API with methods like
 It also exposes terminal events like an Iterator by providing a `next()` method
 (more on that later).
 
-{{% callout type="info" %}}
+{{< callout type="info" >}}
 As I mentioned earlier, this Tui struct is taken from the Ratatui
 documentation
 [here](https://ratatui.rs/how-to/develop-apps/terminal-and-event-handler/).
-{{% /callout %}}
+{{< /callout >}}
 
 
 To switch into the raw mode, the Tui struct exposes the `enter()` method,

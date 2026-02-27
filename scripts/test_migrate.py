@@ -13,9 +13,9 @@ def test_callout_note_no_title():
         "Normal paragraph.",
     ]
     result = convert_callouts(lines)
-    assert '{{% callout type="note" %}}' in result
+    assert '{{< callout type="note" >}}' in result
     assert "This is note content." in result
-    assert "{{% /callout %}}" in result
+    assert "{{< /callout >}}" in result
     assert "Normal paragraph." in result
 
 def test_callout_note_with_title():
@@ -24,9 +24,9 @@ def test_callout_note_with_title():
         "> This post was built with Claude Code.",
     ]
     result = convert_callouts(lines)
-    assert '{{% callout type="note" title="Written with AI" %}}' in result
+    assert '{{< callout type="note" title="Written with AI" >}}' in result
     assert "This post was built with Claude Code." in result
-    assert "{{% /callout %}}" in result
+    assert "{{< /callout >}}" in result
 
 def test_callout_info_with_title():
     lines = [
@@ -89,8 +89,8 @@ def test_multiple_callouts_in_file():
     ]
     result = convert_callouts(lines)
     result_str = "\n".join(result)
-    assert result_str.count("{{% callout") == 2
-    assert result_str.count("{{% /callout %}}") == 2
+    assert result_str.count("{{< callout") == 2
+    assert result_str.count("{{< /callout >}}") == 2
 
 def test_callout_type_is_lowercased():
     lines = ["> [!NOTE]", "> Content."]

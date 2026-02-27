@@ -13,9 +13,9 @@ tags:
 draft: false
 ---
 
-{{% callout type="note" title="Written with AI" %}}
+{{< callout type="note" title="Written with AI" >}}
 This post — and all the code behind it — was built with [Claude Code](https://claude.ai/claude-code). Read [Part 0](vibe-lox-pt0-preamble) for the full story of how this AI-assisted project came together.
-{{% /callout %}}
+{{< /callout >}}
 
 
 If you have ever been curious about how programming languages actually work — how text you type into an editor ends up running as a program — this series is for you. We are going to build a complete compiler for a language called Lox, from scratch, in Rust. By the end you will have seen every layer of a real language implementation: the tokenizer, the parser, a tree-walk interpreter, a bytecode virtual machine, and an LLVM-powered native code compiler.

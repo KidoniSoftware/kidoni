@@ -16,9 +16,9 @@ Writing software tests is hard. Whether you're writing unit tests or integration
 tests or system tests, each presents unique challenges that generally only get
 harder as you go from unit to integration to system testing.
 
-{{% callout type="note" %}}
+{{< callout type="note" >}}
 To see how I differentiate these types of tests, see my [post here](there-is-no-such-thing-as-regression-testing).
-{{% /callout %}}
+{{< /callout >}}
 
 
 Writing unit tests in Rust is relatively straightforward, with built in support
@@ -329,12 +329,12 @@ dependencies.
 So, we create a `TestDb` type for our integration tests, abstracting the setup
 of the specific Postgres image.
 
-{{% callout type="note" %}}
+{{< callout type="note" >}}
 One choice you have to make at this point is if you want to have your tests be
 async or not. `Testcontainers` supports either. If you do decide to use async
 then you will also need something like Tokio, and annotate your tests with
 `#[tokio::test]`. My test project is using async.
-{{% /callout %}}
+{{< /callout >}}
 
 
 ```rust

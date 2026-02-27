@@ -59,13 +59,13 @@ somewhat akin to Rust's `Option` type. You'll see why I mention that in a bit.
 The `Optional` type also has some nice "functional"-style methods like `map()`
 and `filter()` and such-like.
 
-{{% callout type="note" %}}
+{{< callout type="note" >}}
 One thing I don't like about the `Optional` type is its `ifPresent()` method.
 The `ifPresent()` method takes a closure, but returns `void`, so the action you
 provide as a parameter can't directly return a value. I think this is a misfire.
 I think it would be better to have returned `T`. Oh well. I suppose calling
 `map()` could be the alternative, depending on the use case.
-{{% /callout %}}
+{{< /callout >}}
 
 
 I implemented the interface as:

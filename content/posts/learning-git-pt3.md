@@ -16,11 +16,11 @@ previous posts, you can find them here
 - [Part 1](learning-git-pt1) — git init
 - [Part 2](learning-git-pt2) — git hash-object
 
-{{% callout type="info" %}}
+{{< callout type="info" >}}
 At the end of Part 2 I said the next blog would be on `cat-file`. Sorry for
 the bait and switch, but I wanted to do this refactoring, so I snuck this in.
 We'll definitely get to `cat-file` next time.
-{{% /callout %}}
+{{< /callout >}}
 
 
 While this post is mostly standalone, there are aspects of the prior posts that
