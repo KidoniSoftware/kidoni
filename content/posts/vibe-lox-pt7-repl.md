@@ -15,11 +15,11 @@ draft: false
 ---
 
 {{< callout type="note" title="Written with AI" >}}
-This post — and all the code behind it — was built with [Claude Code](https://claude.ai/claude-code). Read [Part 0](vibe-lox-pt0-preamble) for the full story of how this AI-assisted project came together.
+This post — and all the code behind it — was built with [Claude Code](https://claude.ai/claude-code). Read [Part 0](/posts/vibe-lox-pt0-preamble/) for the full story of how this AI-assisted project came together.
 {{< /callout >}}
 
 
-Previously in this series: [Part 1 — Introduction](vibe-lox-pt1-introduction), [Part 2 — Tokenization](vibe-lox-pt2-tokenization), [Part 3 — Parsing](vibe-lox-pt3-parsing), [Part 4 — The Tree-Walk Interpreter](vibe-lox-pt4-interpreter), [Part 5 — The Bytecode VM](vibe-lox-pt5-vm), and [Part 6 — LLVM Compilation](vibe-lox-pt6-llvm). This is the final post in the series.
+Previously in this series: [Part 1 — Introduction](/posts/vibe-lox-pt1-introduction/), [Part 2 — Tokenization](/posts/vibe-lox-pt2-tokenization/), [Part 3 — Parsing](/posts/vibe-lox-pt3-parsing/), [Part 4 — The Tree-Walk Interpreter](/posts/vibe-lox-pt4-interpreter/), [Part 5 — The Bytecode VM](/posts/vibe-lox-pt5-vm/), and [Part 6 — LLVM Compilation](/posts/vibe-lox-pt6-llvm/). This is the final post in the series.
 
 Over six posts we have built the complete compiler pipeline: a winnow-based scanner, a recursive-descent parser, an AST, a tree-walk interpreter, a bytecode VM with its own compiler, and an LLVM IR code generator. What we have not talked about yet is the part that most users will touch first — typing something at a prompt and seeing what happens. This post is about the REPL.
 
@@ -311,6 +311,6 @@ That wraps up the series. We started with a grammar document and a blank Rust pr
 
 The REPL as it stands is solid for everyday Lox experimentation, but there are obvious directions it could grow. Persistent history across sessions — so your arrow-key history survives after you close the terminal — is straightforward: rustyline supports it natively via the `with-file-history` feature flag and a `load_history` / `save_history` call pair. Multi-line input, so you can define a function body across several lines before execution, would require detecting unclosed braces and changing the prompt accordingly. Syntax highlighting is available through rustyline's `Highlighter` trait, which can colorize tokens as you type.
 
-All seven posts cover the full pipeline: [tokenization](vibe-lox-pt2-tokenization), [parsing](vibe-lox-pt3-parsing), [the tree-walk interpreter](vibe-lox-pt4-interpreter), [the bytecode VM](vibe-lox-pt5-vm), [LLVM compilation](vibe-lox-pt6-llvm), and finally the REPL. The full source is on GitHub at [raysuliteanu/vibe-lox](https://github.com/raysuliteanu/vibe-lox) if you want to dig into any part of it.
+All seven posts cover the full pipeline: [tokenization](/posts/vibe-lox-pt2-tokenization/), [parsing](/posts/vibe-lox-pt3-parsing/), [the tree-walk interpreter](/posts/vibe-lox-pt4-interpreter/), [the bytecode VM](/posts/vibe-lox-pt5-vm/), [LLVM compilation](/posts/vibe-lox-pt6-llvm/), and finally the REPL. The full source is on GitHub at [raysuliteanu/vibe-lox](https://github.com/raysuliteanu/vibe-lox) if you want to dig into any part of it.
 
 Thanks for reading.

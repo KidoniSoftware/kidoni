@@ -15,14 +15,14 @@ draft: false
 ---
 
 {{< callout type="note" title="Written with AI" >}}
-This post — and all the code behind it — was built with [Claude Code](https://claude.ai/claude-code). Read [Part 0](vibe-lox-pt0-preamble) for the full story of how this AI-assisted project came together.
+This post — and all the code behind it — was built with [Claude Code](https://claude.ai/claude-code). Read [Part 0](/posts/vibe-lox-pt0-preamble/) for the full story of how this AI-assisted project came together.
 {{< /callout >}}
 
 
 This is part 5 of a series on building a Lox compiler in Rust. Parts 1 through 4 covered the
-language and compiler pipeline ([Part 1](vibe-lox-pt1-introduction)), the tokenizer
-([Part 2](vibe-lox-pt2-tokenization)), the parser and AST ([Part 3](vibe-lox-pt3-parsing)),
-and the tree-walk interpreter ([Part 4](vibe-lox-pt4-interpreter)).
+language and compiler pipeline ([Part 1](/posts/vibe-lox-pt1-introduction/)), the tokenizer
+([Part 2](/posts/vibe-lox-pt2-tokenization/)), the parser and AST ([Part 3](/posts/vibe-lox-pt3-parsing/)),
+and the tree-walk interpreter ([Part 4](/posts/vibe-lox-pt4-interpreter/)).
 
 The tree-walk interpreter is simple and correct — it traverses the AST nodes directly and
 evaluates each one. The simplicity is a feature for understanding language semantics, but it
@@ -515,7 +515,7 @@ each instruction in human-readable form rather than executing it.
 ## What Is Next
 
 With two execution backends in place — the tree-walk interpreter and the bytecode VM — the
-natural question is: how fast can Lox programs go? In [Part 6](vibe-lox-pt6-llvm) we push
+natural question is: how fast can Lox programs go? In [Part 6](/posts/vibe-lox-pt6-llvm/) we push
 further: compiling Lox all the way to LLVM IR and from there to a native ELF executable. The
 value representation changes (a tagged `{i8, i64}` struct instead of a Rust enum), a C runtime
 library enters the picture, and the `inkwell` crate gives us safe Rust bindings for the LLVM

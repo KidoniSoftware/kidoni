@@ -15,11 +15,11 @@ draft: false
 ---
 
 {{< callout type="note" title="Written with AI" >}}
-This post — and all the code behind it — was built with [Claude Code](https://claude.ai/claude-code). Read [Part 0](vibe-lox-pt0-preamble) for the full story of how this AI-assisted project came together.
+This post — and all the code behind it — was built with [Claude Code](https://claude.ai/claude-code). Read [Part 0](/posts/vibe-lox-pt0-preamble/) for the full story of how this AI-assisted project came together.
 {{< /callout >}}
 
 
-Previously in this series, [Part 1](vibe-lox-pt1-introduction) introduced the overall pipeline — scanner, parser, AST, and the multiple backends (tree-walk interpreter, bytecode VM, and LLVM codegen) — and [Part 2](vibe-lox-pt2-tokenization) covered tokenization: how winnow turns raw source text into a flat stream of typed tokens. Now we have that token stream in hand. The parser's job is to take that flat sequence and build a *tree* that captures the actual structure and meaning of the program.
+Previously in this series, [Part 1](/posts/vibe-lox-pt1-introduction/) introduced the overall pipeline — scanner, parser, AST, and the multiple backends (tree-walk interpreter, bytecode VM, and LLVM codegen) — and [Part 2](/posts/vibe-lox-pt2-tokenization/) covered tokenization: how winnow turns raw source text into a flat stream of typed tokens. Now we have that token stream in hand. The parser's job is to take that flat sequence and build a *tree* that captures the actual structure and meaning of the program.
 
 ## From Tokens to Structure
 
@@ -444,4 +444,4 @@ Every node carries its `type` tag, all child nodes, and its `span`. You can pipe
 
 That covers the parser. We have a token stream going in and a typed, span-annotated, richly-structured Rust value coming out — with all `for` loops already desugared to `while` and multiple errors reported in a single pass.
 
-Next up: the *tree-walk interpreter*. [Part 4](vibe-lox-pt4-interpreter) covers the first execution backend — including the resolver pass that determines exactly which declaration each identifier refers to and how many scope levels away it lives, the scoped environment chain that gives Lox its lexical scoping, closures, and the full OOP runtime for classes and instances.
+Next up: the *tree-walk interpreter*. [Part 4](/posts/vibe-lox-pt4-interpreter/) covers the first execution backend — including the resolver pass that determines exactly which declaration each identifier refers to and how many scope levels away it lives, the scoped environment chain that gives Lox its lexical scoping, closures, and the full OOP runtime for classes and instances.

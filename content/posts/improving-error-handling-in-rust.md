@@ -12,7 +12,7 @@ draft: false
 This is another blog in my fledgling series on Rust as I learn the
 language. In this blog I touch on a few cool crates that can improve
 your error handling in Rust. It follows nicely from my prior post on
-[logging in Rust](logging-in-a-rust-app).
+[logging in Rust](/posts/logging-in-a-rust-app/).
 As with that post, this is just an introductory look at error handling. There is
 a lot more one can learn about error handling (in Rust or otherwise) than I will
 cover here. Here I will just touch on a few crates that can get you started.

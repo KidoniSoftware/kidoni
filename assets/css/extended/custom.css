@@ -1,3 +1,8 @@
+/* Remove PaperMod's "featured" first post styling so all entries look the same */
+.first-entry {
+  min-height: unset;
+}
+
 /* Callout blocks (converted from Obsidian/Quartz [!note] syntax) */
 .callout {
   border-left: 4px solid;

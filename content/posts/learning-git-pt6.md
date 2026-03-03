@@ -22,11 +22,11 @@ commit message. If you sign your commit, this ends up as text in the comment.
 
 For easy reference, here are the previous posts.
 
-- [Part 1](learning-git-pt1) — git init
-- [Part 2](learning-git-pt2) — git hash-object
-- [Part 3](learning-git-pt3) — refactoring
-- [Part 4](learning-git-pt4) — git cat-file
-- [Part 5](learning-git-pt5) — git ls-tree
+- [Part 1](/posts/learning-git-pt1/) — git init
+- [Part 2](/posts/learning-git-pt2/) — git hash-object
+- [Part 3](/posts/learning-git-pt3/) — refactoring
+- [Part 4](/posts/learning-git-pt4/) — git cat-file
+- [Part 5](/posts/learning-git-pt5/) — git ls-tree
 
 In the previous post I showed how to print the `tree` object. Now we will create
 one, since that is the prerequisite for being able to create the commit object.

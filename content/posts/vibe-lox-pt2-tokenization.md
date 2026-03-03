@@ -15,11 +15,11 @@ draft: false
 ---
 
 {{< callout type="note" title="Written with AI" >}}
-This post — and all the code behind it — was built with [Claude Code](https://claude.ai/claude-code). Read [Part 0](vibe-lox-pt0-preamble) for the full story of how this AI-assisted project came together.
+This post — and all the code behind it — was built with [Claude Code](https://claude.ai/claude-code). Read [Part 0](/posts/vibe-lox-pt0-preamble/) for the full story of how this AI-assisted project came together.
 {{< /callout >}}
 
 
-In [Part 1](vibe-lox-pt1-introduction) we introduced the Lox language and took a high-level tour of the full compiler pipeline — from raw source text all the way to native code. Now it's time to go deep on the first phase of that pipeline: tokenization. This is where a plain string of characters becomes something a parser can actually reason about.
+In [Part 1](/posts/vibe-lox-pt1-introduction/) we introduced the Lox language and took a high-level tour of the full compiler pipeline — from raw source text all the way to native code. Now it's time to go deep on the first phase of that pipeline: tokenization. This is where a plain string of characters becomes something a parser can actually reason about.
 
 ## What is Tokenization?
 
@@ -381,4 +381,4 @@ The scanner is the narrowest part of the compiler pipeline — it only ever move
 
 What makes the winnow approach satisfying is how directly the code maps to the intent. `scan_token` reads like a specification: "a token is a string literal, or a number, or an identifier-or-keyword, or a two-character operator, or a single-character operator, in that order of precedence." Each sub-parser is self-contained and testable in isolation. And the `LocatingSlice` wrapper gives span tracking for free, with no manual cursor arithmetic.
 
-Next up in [Part 3](vibe-lox-pt3-parsing): the recursive-descent parser that consumes this token stream and produces an Abstract Syntax Tree.
+Next up in [Part 3](/posts/vibe-lox-pt3-parsing/): the recursive-descent parser that consumes this token stream and produces an Abstract Syntax Tree.

@@ -11,7 +11,7 @@ draft: false
 ---
 
 This post continues from where I left off in the first post that covered
-creating a new empty repository. You can read it [here](learning-git-pt1). To
+creating a new empty repository. You can read it [here](/posts/learning-git-pt1/). To
 briefly summarize the goal of this series of posts, I am on a journey to learn
 Rust and for me the best way is doing "real" stuff. In this case I'm looking at
 the internals of Git, by implementing some of the many commands available.

@@ -15,11 +15,11 @@ draft: false
 ---
 
 {{< callout type="note" title="Written with AI" >}}
-This post — and all the code behind it — was built with [Claude Code](https://claude.ai/claude-code). Read [Part 0](vibe-lox-pt0-preamble) for the full story of how this AI-assisted project came together.
+This post — and all the code behind it — was built with [Claude Code](https://claude.ai/claude-code). Read [Part 0](/posts/vibe-lox-pt0-preamble/) for the full story of how this AI-assisted project came together.
 {{< /callout >}}
 
 
-Previously in this series we built the tokenizer ([Part 2](vibe-lox-pt2-tokenization)) and the recursive descent parser ([Part 3](vibe-lox-pt3-parsing)), turning raw source text into a typed AST. [Part 1](vibe-lox-pt1-introduction) gave the bird's-eye view of the whole pipeline. At this point, `vibe-lox` can take a `.lox` file, scan it into tokens, and parse those tokens into a tree of strongly-typed Rust structs — every node stamped with a unique `ExprId` for later use. Now we need to actually run the thing. This post covers the first execution backend: the tree-walk interpreter.
+Previously in this series we built the tokenizer ([Part 2](/posts/vibe-lox-pt2-tokenization/)) and the recursive descent parser ([Part 3](/posts/vibe-lox-pt3-parsing/)), turning raw source text into a typed AST. [Part 1](/posts/vibe-lox-pt1-introduction/) gave the bird's-eye view of the whole pipeline. At this point, `vibe-lox` can take a `.lox` file, scan it into tokens, and parse those tokens into a tree of strongly-typed Rust structs — every node stamped with a unique `ExprId` for later use. Now we need to actually run the thing. This post covers the first execution backend: the tree-walk interpreter.
 
 ---
 

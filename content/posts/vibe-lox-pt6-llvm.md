@@ -16,11 +16,11 @@ draft: false
 ---
 
 {{< callout type="note" title="Written with AI" >}}
-This post — and all the code behind it — was built with [Claude Code](https://claude.ai/claude-code). Read [Part 0](vibe-lox-pt0-preamble) for the full story of how this AI-assisted project came together.
+This post — and all the code behind it — was built with [Claude Code](https://claude.ai/claude-code). Read [Part 0](/posts/vibe-lox-pt0-preamble/) for the full story of how this AI-assisted project came together.
 {{< /callout >}}
 
 
-Previously in this series, [Part 1](vibe-lox-pt1-introduction) introduced the project and the Lox language. [Part 2](vibe-lox-pt2-tokenization) built the tokenizer using `winnow`, [Part 3](vibe-lox-pt3-parsing) wrote the recursive descent parser, [Part 4](vibe-lox-pt4-interpreter) covered the tree-walk interpreter, and [Part 5](vibe-lox-pt5-vm) added a bytecode virtual machine as a second execution backend. At this point, vibe-lox has two ways to run a Lox program: walk the AST directly, or compile to bytecode and run it in a stack VM. This post covers the most ambitious backend yet: compiling Lox all the way to native machine code via LLVM.
+Previously in this series, [Part 1](/posts/vibe-lox-pt1-introduction/) introduced the project and the Lox language. [Part 2](/posts/vibe-lox-pt2-tokenization/) built the tokenizer using `winnow`, [Part 3](/posts/vibe-lox-pt3-parsing/) wrote the recursive descent parser, [Part 4](/posts/vibe-lox-pt4-interpreter/) covered the tree-walk interpreter, and [Part 5](/posts/vibe-lox-pt5-vm/) added a bytecode virtual machine as a second execution backend. At this point, vibe-lox has two ways to run a Lox program: walk the AST directly, or compile to bytecode and run it in a stack VM. This post covers the most ambitious backend yet: compiling Lox all the way to native machine code via LLVM.
 
 ---
 

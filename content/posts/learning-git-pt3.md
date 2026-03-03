@@ -13,8 +13,8 @@ draft: false
 In this post we continue our journey with Rust and Git. If you haven't read the
 previous posts, you can find them here
 
-- [Part 1](learning-git-pt1) — git init
-- [Part 2](learning-git-pt2) — git hash-object
+- [Part 1](/posts/learning-git-pt1/) — git init
+- [Part 2](/posts/learning-git-pt2/) — git hash-object
 
 {{< callout type="info" >}}
 At the end of Part 2 I said the next blog would be on `cat-file`. Sorry for

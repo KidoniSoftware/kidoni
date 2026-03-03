@@ -7,89 +7,89 @@ enableRobotsTxt: true
 buildDrafts: false
 
 outputs:
-  home:
-    - HTML
-    - RSS
-    - JSON  # required for PaperMod Fuse.js search
+    home:
+        - HTML
+        - RSS
+        - JSON # required for PaperMod Fuse.js search
 
 minify:
-  disableXML: true
-  minifyOutput: true
+    disableXML: true
+    minifyOutput: true
 
 params:
-  env: production
-  title: kidoni.dev
-  description: Software development blog covering Rust, Java, and systems programming.
-  author: Ray Suliteanu
+    env: production
+    title: kidoni.dev
+    description: Software development blog covering Rust, Java, Spring Boot, productivity and systems programming.
+    author: Ray Suliteanu
 
-  defaultTheme: auto
-  disableThemeToggle: false
+    defaultTheme: auto
+    disableThemeToggle: false
 
-  ShowReadingTime: true
-  ShowShareButtons: true
-  ShowPostNavLinks: true
-  ShowBreadCrumbs: true
-  ShowCodeCopyButtons: true
-  ShowRssButtonInSectionTermList: true
-  UseHugoToc: true
-  comments: true
-  showtoc: true
-  tocopen: false
+    ShowReadingTime: true
+    ShowShareButtons: true
+    ShowPostNavLinks: true
+    ShowBreadCrumbs: true
+    ShowCodeCopyButtons: true
+    ShowRssButtonInSectionTermList: true
+    UseHugoToc: true
+    comments: true
+    showtoc: true
+    tocopen: false
 
-  homeInfoParams:
-    Title: kidoni.dev
-    Content: Software development blog covering Rust, Java, and systems programming.
+    homeInfoParams:
+        Title: Programming Perambulations
+        Content: Software development blog covering Rust, Java, Spring Boot, productivity and systems programming.
 
-  socialIcons:
-    - name: github
-      url: https://github.com/raysuliteanu
+    socialIcons:
+        - name: github
+          url: https://github.com/raysuliteanu
 
-  fuseOpts:
-    isCaseSensitive: false
-    shouldSort: true
-    location: 0
-    distance: 1000
-    threshold: 0.4
-    minMatchCharLength: 0
-    limit: 10
-    keys:
-      - title
-      - permalink
-      - summary
-      - content
+    fuseOpts:
+        isCaseSensitive: false
+        shouldSort: true
+        location: 0
+        distance: 1000
+        threshold: 0.4
+        minMatchCharLength: 0
+        limit: 10
+        keys:
+            - title
+            - permalink
+            - summary
+            - content
 
 menu:
-  main:
-    - identifier: about
-      name: About
-      url: /about/
-      weight: 10
-    - identifier: search
-      name: Search
-      url: /search/
-      weight: 20
-    - identifier: tags
-      name: Tags
-      url: /tags/
-      weight: 30
-    - identifier: archives
-      name: Archives
-      url: /archives/
-      weight: 40
+    main:
+        - identifier: about
+          name: About
+          url: /about/
+          weight: 10
+        - identifier: search
+          name: Search
+          url: /search/
+          weight: 20
+        - identifier: tags
+          name: Tags
+          url: /tags/
+          weight: 30
+        - identifier: archives
+          name: Archives
+          url: /archives/
+          weight: 40
 
 markup:
-  goldmark:
-    renderer:
-      # Allow raw HTML passthrough from authored content (trusted source)
-      unsafe: true
-  highlight:
-    noClasses: false
-    anchorLineNos: false
-    codeFences: true
-    guessSyntax: true
-    lineNos: false
-    style: monokai
+    goldmark:
+        renderer:
+            # Allow raw HTML passthrough from authored content (trusted source)
+            unsafe: true
+    highlight:
+        noClasses: false
+        anchorLineNos: false
+        codeFences: true
+        guessSyntax: true
+        lineNos: false
+        style: monokai
 
 services:
-  googleAnalytics:
-    ID: G-X783PXP90Q
+    googleAnalytics:
+        ID: G-X783PXP90Q

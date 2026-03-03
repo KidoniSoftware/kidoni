@@ -73,13 +73,13 @@ referenced in the blog series.
 The blogs are best read in order, particularly if you're new to compilers,
 but feel free to jump around based on your interests.
 
-- [Part 1 - Introduction](vibe-lox-pt1-introduction)
-- [Part 2 - Tokenization](vibe-lox-pt2-tokenization)
-- [Part 3 - Parsing](vibe-lox-pt3-parsing)
-- [Part 4 - Interpreter](vibe-lox-pt4-interpreter)
-- [Part 5 - VM](vibe-lox-pt5-vm)
-- [Part 6 - LLVM](vibe-lox-pt6-llvm)
-- [Part 7 - REPL](vibe-lox-pt7-repl)
+- [Part 1 - Introduction](/posts/vibe-lox-pt1-introduction/)
+- [Part 2 - Tokenization](/posts/vibe-lox-pt2-tokenization/)
+- [Part 3 - Parsing](/posts/vibe-lox-pt3-parsing/)
+- [Part 4 - Interpreter](/posts/vibe-lox-pt4-interpreter/)
+- [Part 5 - VM](/posts/vibe-lox-pt5-vm/)
+- [Part 6 - LLVM](/posts/vibe-lox-pt6-llvm/)
+- [Part 7 - REPL](/posts/vibe-lox-pt7-repl/)
 
 I am very interested to hear any comments or feedback on how you think Claude
 did, both in the code and in the blog posts.

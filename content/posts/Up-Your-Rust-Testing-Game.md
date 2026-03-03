@@ -17,7 +17,7 @@ tests or system tests, each presents unique challenges that generally only get
 harder as you go from unit to integration to system testing.
 
 {{< callout type="note" >}}
-To see how I differentiate these types of tests, see my [post here](there-is-no-such-thing-as-regression-testing).
+To see how I differentiate these types of tests, see my [post here](/posts/there-is-no-such-thing-as-regression-testing/).
 {{< /callout >}}
 
 

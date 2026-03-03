@@ -10,7 +10,7 @@ tags:
 draft: false
 ---
 
-In my previous post about [Using off-heap memory in Java programs](Using-off-heap-memory-in-Java-programs)
+In my previous post about [Using off-heap memory in Java programs](/posts/Using-off-heap-memory-in-Java-programs/)
 I showed how to set up a memory-mapped file. Now that
 we have a memory-mapped file, let's write something to the file. There
 are different approaches to how to serialize Java objects obviously

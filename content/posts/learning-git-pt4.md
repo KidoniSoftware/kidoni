@@ -13,9 +13,9 @@ draft: false
 In this post we'll cover the Git `cat-file` command. Previous posts in this
 series are
 
-- [Part 1](learning-git-pt1) — git init
-- [Part 2](learning-git-pt2) — git hash-object
-- [Part 3](learning-git-pt3) — refactoring
+- [Part 1](/posts/learning-git-pt1/) — git init
+- [Part 2](/posts/learning-git-pt2/) — git hash-object
+- [Part 3](/posts/learning-git-pt3/) — refactoring
 
 The Git [`cat-file`](https://git-scm.com/docs/git-cat-file) command let's you
 dump the contents of a Git object. You cannot view Git object files directly

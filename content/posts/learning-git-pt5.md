@@ -13,10 +13,10 @@ draft: false
 In this latest blog on Git internals with Rust, I will focus on the `ls-tree`
 command in Git. You can find the earlier posts here:
 
-- [Part 1](learning-git-pt1) — git init
-- [Part 2](learning-git-pt2) — git hash-object
-- [Part 3](learning-git-pt3) — refactoring
-- [Part 4](learning-git-pt4) — git cat-file
+- [Part 1](/posts/learning-git-pt1/) — git init
+- [Part 2](/posts/learning-git-pt2/) — git hash-object
+- [Part 3](/posts/learning-git-pt3/) — refactoring
+- [Part 4](/posts/learning-git-pt4/) — git cat-file
 
 The `ls-tree` command is similar to doing an `ls` in a terminal emulator. It
 lists the contents of `tree` objects in Git. The Git object model looks like
