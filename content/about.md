@@ -32,8 +32,7 @@ My resume is available [here](assets/resume-20260221.pdf).
 
 I have migrated my blog posts from my existing [Medium](https://raysuliteanu.medium.com)
 site to this self-hosted, self-managed and _free_ site. This site is built using
-[Quartz](https://quartz.jzhao.xyz/). Perhaps I will write a blog post about the
-migration! If that's of interest, send me a comment below.
+[Hugo](https://gohugo.io).
 
 ## Support
 
