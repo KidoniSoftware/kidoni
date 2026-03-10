@@ -25,6 +25,10 @@ params:
     defaultTheme: auto
     disableThemeToggle: false
 
+    label:
+        icon: images/logo.png
+        iconHeight: 30
+
     ShowReadingTime: true
     ShowShareButtons: true
     ShowPostNavLinks: true
