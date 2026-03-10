@@ -13,3 +13,4 @@ worktrees/
 # Python
 __pycache__/
 *.pyc
+tmp/
