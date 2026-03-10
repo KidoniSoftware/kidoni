@@ -31,6 +31,10 @@ params:
 
     ShowReadingTime: true
     ShowShareButtons: true
+    ShareButtons:
+        - linkedin
+        - reddit
+        - ycombinator
     ShowPostNavLinks: true
     ShowBreadCrumbs: true
     ShowCodeCopyButtons: true
