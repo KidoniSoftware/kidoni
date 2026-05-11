@@ -142,6 +142,10 @@ layouts/
 assets/css/extended/
   custom.css          # callout styles
 themes/PaperMod/      # PaperMod theme (git submodule)
+layouts/
+  baseof.html                         # override: .Language.Direction (PaperMod deprecation workaround)
+  rss.xml                             # override: site.Language.Locale (PaperMod deprecation workaround)
+  _partials/templates/opengraph.html  # override: site.Language.Locale (PaperMod deprecation workaround)
 scripts/
   migrate.py          # one-shot Quartz→Hugo migration script (kept for reference)
 hugo.yaml             # site configuration
