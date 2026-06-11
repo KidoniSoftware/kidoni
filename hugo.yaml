@@ -1,7 +1,7 @@
 baseURL: https://kidoni.dev/
 title: kidoni.dev
 theme: PaperMod
-languageCode: en-US
+locale: en-US
 paginate: 10
 enableRobotsTxt: true
 buildDrafts: false
